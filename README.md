@@ -2,7 +2,8 @@
 
 Membros:
 
--João Pedro Silva Freitas;
+- Dhayana Nascimento Silva - 201976040;
 
--Maicon Willian Niebus Odone;
+- João Pedro Silva Freitas - 201935033;
 
+- Maicon Willian Niebus Odone - 202065584B.
