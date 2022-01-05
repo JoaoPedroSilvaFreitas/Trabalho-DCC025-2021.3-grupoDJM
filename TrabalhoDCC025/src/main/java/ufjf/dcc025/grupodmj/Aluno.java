@@ -20,6 +20,42 @@ public class Aluno
         this.Turma = Turma;
     }
     
+    //Setters
+    void SetId(int id)
+    {
+        this.id = id;
+    }
+    
+    void SetNome(String Nome)
+    {
+        this.Nome = Nome;
+    }
+    
+    void SetDataDeNasc(String DataDeNasc)
+    {
+        this.DataDeNasc = DataDeNasc;
+    }
+    
+    void SetResponsavel(String Responsavel)
+    {
+        this.Responsavel = Responsavel;
+    }
+    
+    void SetTelefone(String Telefone)
+    {
+        this.Telefone = Telefone;
+    }
+    
+    void SetEndereco(String Endereco)
+    {
+        this.Endereco = Endereco;
+    }
+            
+    void SetTurma(String Turma)
+    {
+        this.Turma = Turma;
+    }
+    
     //Getters
     int GetId()
     {
