@@ -1,19 +1,28 @@
-package ufjf.dcc025.grupodmj;
+package ufjf.dcc025.grupodmj.obj;
 
+import java.util.Scanner;
+import java.util.*;
 
-public class Admin 
+public class Admin extends Usuario
 {   
-    String Senha;
+    List<Aluno> alunos = new ArrayList<>();
+    List<Professor> professores = new ArrayList<>();
     
-    //Alterar senha
-    void SetSenha(String Senha)
+    Admin()
     {
-        this.Senha = Senha;
+        this.Usuario = "Admin";
+        this.Senha = "Admin";
     }
-    
     //Aluno
     void CadastrarAluno()
     {
+        Scanner sc = new Scanner(System.in);
+        int ID;
+        String Senha, Nome, DataDeNasc, Filiacao, Telefone, Endereco, Turma;
+        Aluno aluno;
+        
+        Nome = sc.nextLine();
+        DataDeNasc = sc.nextLine();
         
     }
     void RemoverAluno()

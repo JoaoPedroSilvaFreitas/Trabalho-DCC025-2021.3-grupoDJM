@@ -17,7 +17,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ufjf.dcc025.grupodmj.Principal</mainClass>
+                            <mainClass>ufjf.dcc025.grupodmj.obj.Principal</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

@@ -1,4 +1,4 @@
-package ufjf.dcc025.grupodmj;
+package ufjf.dcc025.grupodmj.obj;
 
 
 public class Disciplina 
