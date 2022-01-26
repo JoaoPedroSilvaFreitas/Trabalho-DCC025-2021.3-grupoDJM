@@ -63,7 +63,7 @@ abstract class Membro extends Usuario
         this.DataDeNasc = DataDeNasc;
     }
     
-    void SetResponsavel(String Filiacao)
+    void SetFiliacao(String Filiacao)
     {
         this.Filiacao = Filiacao;
     }

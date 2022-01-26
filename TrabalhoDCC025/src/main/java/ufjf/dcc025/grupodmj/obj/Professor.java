@@ -4,7 +4,7 @@ package ufjf.dcc025.grupodmj.obj;
 public class Professor extends Membro
 {
     //Construtor
-    Professor(int ID, String Nome, String CPF, String Telefone, String Endereco, String Turma)
+    Professor(int ID, String CPF, String Senha, String Nome, String DataDeNasc, String Filiacao, String Telefone, String Endereco, String Turma)
     {
         this.ID = ID;
         this.Nome = Nome;
@@ -12,6 +12,11 @@ public class Professor extends Membro
         this.Telefone = Telefone;
         this.Endereco = Endereco;
         this.Turma = Turma;
+        this.Senha = Senha;
+        this.DataDeNasc = DataDeNasc;
+        this.Filiacao = Filiacao;
+        
+        
     }
     
      

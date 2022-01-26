@@ -4,7 +4,7 @@ package ufjf.dcc025.grupodmj.obj;
 public class Aluno extends Membro
 {
     //Construtor
-    Aluno(int ID, String Senha, String Nome, String DataDeNasc, String Filiacao, String Telefone, String Endereco, String Turma)
+    Aluno(int ID, String CPF, String Senha, String Nome, String DataDeNasc, String Filiacao, String Telefone, String Endereco, String Turma)
     {
         this.ID = ID;
         this.Senha = Senha;
