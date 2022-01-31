@@ -1,65 +1,72 @@
 package ufjf.dcc025.grupodmj.obj;
 
+import java.util.*;
+import java.util.Scanner;
 
 public class Turma 
 {
     //Atributos
-    int id, Ano, IdProfessor;
-    String Turno, Titulo, Horario;
+    List<Disciplina> disciplinas = new ArrayList<>();
+    List<Aluno> alunos = new ArrayList<>();
+    String id, Titulo, Horario; //PROVAVELMENTE PRECISAREI ALTERAR NO FUTURO
+    Professor professor;
+    int Serie;
+    Boolean Turno;
     
     //Construtor
-    Turma(int id, int Ano, int IdProfessor, String Turno, String Titulo, String Horario)
+    Turma(String id, int Serie, Professor professor, Boolean Turno)
     {
         this.id = id;
-        this.Ano = Ano;
+        this.Serie = Serie;
         this.Turno = Turno;
-        this.Titulo = Titulo;
-        this.Horario = Horario;
-        this.IdProfessor = IdProfessor;
+        this.professor = professor;
     }
     
     //Adiciona alunos na turma
-    void SetAlunos()
+    void AddAluno(Aluno aluno)
     {
-        
-    }
-    
-    //Edita Professor da turma
-    void SetProfessor()
-    {
-        
+        alunos.add(aluno);
     }
     
     //Adiciona disciplinas na turma
-    void SetDisciplinas()
+    void AddDisciplina(Disciplina disciplina)
     {
-        
+        disciplinas.add(disciplina);
+    }
+    
+    //retorna aluno da turma
+    Aluno GetAluno(String Id)
+    {
+        for(Aluno aluno : alunos)
+        {
+            if(aluno.GetId().equals(Id))
+            {
+                return aluno;
+            }
+        }
+        return null;
+    }
+    
+    //Edita Professor da turma
+    void SetProfessor(Professor professor)
+    {
+        this.professor = professor;
     }
     
     //Setters
-    void SetId(int id)
+    void SetId(String id)
     {
         this.id = id;
     }
     
-    void SetAno(int Ano)
+    void SetSerie(int Serie)
     {
-        this.Ano = Ano;
+        this.Serie = Serie;
     }
     
-    void SetProfessor(int IdProfessor)
-    {
-        this.IdProfessor = IdProfessor;
-    }
-    
-    void SetTurno(String Turno)
+    void SetTurno(Boolean Turno)
     {
         this.Turno = Turno;
-    }
-    
-    void SetTitulo(String Titulo)
-    {
-        this.Titulo = Titulo;
     }
     
     void SetHorario(String Horario)
@@ -68,29 +75,31 @@ public class Turma
     }
     
     //Getters
-    int GetId()
+    String GetId()
     {
         return this.id;
     }
     
-    int GetAno()
+    int GetSerie()
     {
-        return this.Ano;
+        return this.Serie;
     }
     
-    int GetProfessor()
+    Professor GetProfessor()
     {
-        return this.IdProfessor;
+        return this.professor;
     }
     
     String GetTurno()
     {
-        return this.Turno;
-    }
-    
-    String GetTitulo()
-    {
-        return this.Titulo;
+        if(Turno == true)
+        {
+            return "Matutino";
+        }
+        else
+            {
+                return "Vespertino";
+            } 
     }
     
     String GetHorario()

@@ -3,13 +3,13 @@ package ufjf.dcc025.grupodmj.obj;
 
 abstract class Membro extends Usuario
 {
-    int ID;
-    String Nome, DataDeNasc, CPF, Filiacao, Telefone, Endereco, Turma;
+    String Id, Nome, DataDeNasc, Filiacao, Telefone, Endereco;
+    Turma Turma;
     
     //Getters
-    int GetId()
+    String GetId()
     {
-        return this.ID;
+        return this.Id;
     }
     
     String GetNome()
@@ -37,20 +37,15 @@ abstract class Membro extends Usuario
         return this.Endereco;
     }
             
-    String GetTurma()
+    Turma GetTurma()
     {
         return this.Turma;
     }
     
-    String GetCPF()
-    {
-        return this.CPF;
-    }
-    
     //Setters
-    void SetId(int ID)
+    void SetId(String Id)
     {
-        this.ID = ID;
+        this.Id = Id;
     }
     
     void SetNome(String Nome)
@@ -78,14 +73,9 @@ abstract class Membro extends Usuario
         this.Endereco = Endereco;
     }
             
-    void SetTurma(String Turma)
+    void SetTurma(Turma Turma)
     {
         this.Turma = Turma;
-    }
-    
-    void SetCPF(String CPF)
-    {
-        this.CPF = CPF;
     }
     
 }

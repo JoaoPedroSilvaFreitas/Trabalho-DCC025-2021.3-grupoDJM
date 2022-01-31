@@ -4,18 +4,18 @@ package ufjf.dcc025.grupodmj.obj;
 public class Disciplina 
 {
     //Atributos
-    int id;
-    String Nome;
+    int Horario;
+    String id, Nome;
     
     //Construtor
-    Disciplina(int id, String Nome)
+    Disciplina(String id, String Nome)
     {
         this.id = id;
         this.Nome = Nome;
     }
     
     //Setters
-    void SetId(int id)
+    void SetId(String id)
     {
         this.id = id;
     }
@@ -25,9 +25,14 @@ public class Disciplina
         this.Nome = Nome;
     }
     
+    void SetHorario(int Horario)
+    {
+        //O horario é representado por um inteiro de 2 a 6 que representa os dias da semana entre segunda e sexta feira
+        this.Horario = Horario;
+    }
     
     //Getters
-    int GetId()
+    String GetId()
     {
         return this.id;
     }
@@ -35,6 +40,11 @@ public class Disciplina
     String GetNome()
     {
         return this.Nome;
+    }
+    
+    int GetHorario()
+    {
+        return this.Horario;
     }
     
 }

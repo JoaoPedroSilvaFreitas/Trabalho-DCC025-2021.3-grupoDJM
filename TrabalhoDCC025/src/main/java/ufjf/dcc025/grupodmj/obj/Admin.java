@@ -7,6 +7,7 @@ public class Admin extends Usuario
 {   
     List<Aluno> alunos = new ArrayList<>();
     List<Professor> professores = new ArrayList<>();
+    List<Turma> turmas = new ArrayList<>();
     
     Admin()
     {
@@ -17,34 +18,31 @@ public class Admin extends Usuario
     //Aluno
     void CadastrarAluno()
     {
-        String senha, Nome, DataDeNasc, Filiacao, Telefone, Endereco, Turma, CPF;
+        String Id, senha, Nome, DataDeNasc, Filiacao, Telefone, Endereco;
         Scanner sc = new Scanner(System.in);
         Aluno aluno;
-        int ID;
         
-        ID = sc.nextInt();
+        Id = sc.nextLine();
         Nome = sc.nextLine();
         senha = sc.nextLine();
-        CPF = sc.nextLine();
         DataDeNasc = sc.nextLine();
         Filiacao = sc.nextLine();
         Telefone = sc.nextLine();
         Endereco = sc.nextLine();
-        Turma = sc.nextLine();
         
-        aluno = new Aluno(ID, CPF, senha, Nome, DataDeNasc, Filiacao, Telefone, Endereco, Turma);
+        aluno = new Aluno(Id, senha, Nome, DataDeNasc, Filiacao, Telefone, Endereco);
         alunos.add(aluno);
     }
     void RemoverAluno()
     {
         Scanner sc = new Scanner(System.in);
-        int id;
+        String id;
         
-        id = sc.nextInt();
+        id = sc.nextLine();
         
         for(Aluno aluno : alunos)
         {
-            if(aluno.GetId() == id)
+            if(aluno.GetId().equals(id))
             {
                 alunos.remove(aluno);
                 break;
@@ -54,19 +52,18 @@ public class Admin extends Usuario
     void EditarAluno()
     {
         Scanner sc = new Scanner(System.in);
-        String Aux;
+        String Aux, id, idaux;
         char opt = 'D';
-        int id, idaux;
         
-        id = sc.nextInt();
+        id = sc.nextLine();
         
         for(Aluno aluno : alunos)
         {
-            if(aluno.GetId() == id)
+            if(aluno.GetId().equals(id))
             {
                 do{
-                    opt = MenuEditar();
-                }while(opt != '0' && opt != '1' && opt != '2' && opt != '3' && opt != '4' && opt != '5' && opt != '6' && opt != '7' && opt != '8');
+                    opt = MenuEditarAlunoProf();
+                }while(opt != '0' && opt != '1' && opt != '2' && opt != '3' && opt != '4' && opt != '5' && opt != '6');
                 
                 if(opt == '0')
                 {
@@ -76,53 +73,39 @@ public class Admin extends Usuario
                 if(opt == '1')
                 {
                     System.out.println("Novo ID:");
-                    idaux = sc.nextInt();
+                    idaux = sc.nextLine();
                     aluno.SetId(idaux);
                 }
                 
                 if(opt == '2')
-                {
-                    System.out.println("Nova turma:");
-                    Aux = sc.nextLine();
-                    aluno.SetTurma(Aux);
-                }
-                
-                if(opt == '3')
                 {
                     System.out.println("Novo nome:");
                     Aux = sc.nextLine();
                     aluno.SetNome(Aux);
                 }
                 
-                if(opt == '4')
-                {
-                    System.out.println("Novo CPF:");
-                    Aux = sc.nextLine();
-                    aluno.SetCPF(Aux);
-                }
-                
-                if(opt == '5')
+                if(opt == '3')
                 {
                     System.out.println("Nova data de nascimento:");
                     Aux = sc.nextLine();
                     aluno.SetDataDeNasc(Aux);
                 }
                 
-                if(opt == '6')
+                if(opt == '4')
                 {
                     System.out.println("Novo responsável:");
                     Aux = sc.nextLine();
                     aluno.SetFiliacao(Aux);
                 }
                 
-                if(opt == '7')
+                if(opt == '5')
                 {
                     System.out.println("Novo telefone:");
                     Aux = sc.nextLine();
                     aluno.SetTelefone(Aux);
                 }
                 
-                if(opt == '8')
+                if(opt == '6')
                 {
                     System.out.println("Novo endereço:");
                     Aux = sc.nextLine();
@@ -136,18 +119,17 @@ public class Admin extends Usuario
     void DadosAluno()
     {
         Scanner sc = new Scanner(System.in);
-        int id;
+        String id;
         
-        id = sc.nextInt();
+        id = sc.nextLine();
         
         for(Aluno aluno : alunos)
         {
-            if(aluno.GetId() == id)
+            if(aluno.GetId().equals(id))
             {
                 System.out.println("Id: " + aluno.GetId());
                 System.out.println("Turma: " + aluno.GetTurma());
                 System.out.println("Nome: " + aluno.GetNome());
-                System.out.println("CPF: " + aluno.GetCPF());
                 System.out.println("Data de Nascimento: " + aluno.GetDataDeNasc());
                 System.out.println("Responsável: " + aluno.GetFiliacao());
                 System.out.println("Telefone: " + aluno.GetTelefone());
@@ -160,34 +142,31 @@ public class Admin extends Usuario
     //Professor
     void CadastrarProfessor()
     {
-        String senha, Nome, DataDeNasc, Filiacao, Telefone, Endereco, Turma, CPF;
+        String Id, senha, Nome, DataDeNasc, Filiacao, Telefone, Endereco;
         Scanner sc = new Scanner(System.in);
         Professor professor;
-        int ID;
         
-        ID = sc.nextInt();
+        Id = sc.nextLine();
         Nome = sc.nextLine();
         senha = sc.nextLine();
-        CPF = sc.nextLine();
         DataDeNasc = sc.nextLine();
         Filiacao = sc.nextLine();
         Telefone = sc.nextLine();
         Endereco = sc.nextLine();
-        Turma = sc.nextLine();
         
-        professor = new Professor(ID, CPF, senha, Nome, DataDeNasc, Filiacao, Telefone, Endereco, Turma);
+        professor = new Professor(Id, senha, Nome, DataDeNasc, Filiacao, Telefone, Endereco);
         professores.add(professor);
     }
     void RemoverProfessor()
     {
         Scanner sc = new Scanner(System.in);
-        int id;
+        String id;
         
-        id = sc.nextInt();
+        id = sc.nextLine();
         
         for(Professor professor : professores)
         {
-            if(professor.GetId() == id)
+            if(professor.GetId().equals(id))
             {
                 professores.remove(professor);
                 break;
@@ -197,19 +176,18 @@ public class Admin extends Usuario
     void EditarProfessor()
     {
         Scanner sc = new Scanner(System.in);
-        String Aux;
+        String Aux, id, idaux;
         char opt = 'D';
-        int id, idaux;
         
-        id = sc.nextInt();
+        id = sc.nextLine();
         
         for(Professor professor : professores)
         {
-            if(professor.GetId() == id)
+            if(professor.GetId().equals(id))
             {
                 do{
-                    opt = MenuEditar();
-                }while(opt != '0' && opt != '1' && opt != '2' && opt != '3' && opt != '4' && opt != '5' && opt != '6' && opt != '7' && opt != '8');
+                    opt = MenuEditarAlunoProf();
+                }while(opt != '0' && opt != '1' && opt != '2' && opt != '3' && opt != '4' && opt != '5' && opt != '6');
                 
                 if(opt == '0')
                 {
@@ -219,53 +197,39 @@ public class Admin extends Usuario
                 if(opt == '1')
                 {
                     System.out.println("Novo ID:");
-                    idaux = sc.nextInt();
+                    idaux = sc.nextLine();
                     professor.SetId(idaux);
                 }
                 
                 if(opt == '2')
-                {
-                    System.out.println("Nova turma:");
-                    Aux = sc.nextLine();
-                    professor.SetTurma(Aux);
-                }
-                
-                if(opt == '3')
                 {
                     System.out.println("Novo nome:");
                     Aux = sc.nextLine();
                     professor.SetNome(Aux);
                 }
                 
-                if(opt == '4')
-                {
-                    System.out.println("Novo CPF:");
-                    Aux = sc.nextLine();
-                    professor.SetCPF(Aux);
-                }
-                
-                if(opt == '5')
+                if(opt == '3')
                 {
                     System.out.println("Nova data de nascimento:");
                     Aux = sc.nextLine();
                     professor.SetDataDeNasc(Aux);
                 }
                 
-                if(opt == '6')
+                if(opt == '4')
                 {
                     System.out.println("Nova filiação:");
                     Aux = sc.nextLine();
                     professor.SetFiliacao(Aux);
                 }
                 
-                if(opt == '7')
+                if(opt == '5')
                 {
                     System.out.println("Novo telefone:");
                     Aux = sc.nextLine();
                     professor.SetTelefone(Aux);
                 }
                 
-                if(opt == '8')
+                if(opt == '6')
                 {
                     System.out.println("Novo endereço:");
                     Aux = sc.nextLine();
@@ -279,18 +243,17 @@ public class Admin extends Usuario
     void DadosProfessor()
     {
         Scanner sc = new Scanner(System.in);
-        int id;
+        String id;
         
-        id = sc.nextInt();
+        id = sc.nextLine();
         
         for(Professor professor : professores)
         {
-            if(professor.GetId() == id)
+            if(professor.GetId().equals(id))
             {
                 System.out.println("Id: " + professor.GetId());
                 System.out.println("Turma: " + professor.GetTurma());
                 System.out.println("Nome: " + professor.GetNome());
-                System.out.println("CPF: " + professor.GetCPF());
                 System.out.println("Data de Nascimento: " + professor.GetDataDeNasc());
                 System.out.println("Filiação: " + professor.GetFiliacao());
                 System.out.println("Telefone: " + professor.GetTelefone());
@@ -303,59 +266,167 @@ public class Admin extends Usuario
     //Turma
     void CadastrarTurma()
     {
+        Scanner sc = new Scanner(System.in);
+        Professor professor = null;
+        int Serie;
+        String ID, id;
+        Boolean Turno;
+        Turma turma;
+        
+        ID = sc.nextLine();
+        Serie = sc.nextInt();
+        Turno = sc.nextBoolean();
+        id = sc.nextLine();
+        
+        for(Professor prof : professores)
+        {
+            if(prof.GetId().equals(id))
+            {
+                professor = prof;
+                break;
+            }
+        }
+        
+        turma = new Turma(ID, Serie, professor, Turno);
+        turmas.add(turma);
+        professor.SetTurma(turma);
+        
+        //Adicionando alunos na turma
+        boolean continuar = true;
+        do
+        {
+            continuar = sc.nextBoolean();
+            id = sc.nextLine();
+
+            for(Aluno aluno : alunos)
+            {
+                if(aluno.GetId().equals(id))
+                {
+                    turma.alunos.add(aluno);
+                    break;
+                }
+            }
+        }while(continuar == true);
         
     }
     void RemoverTurma()
     {
+        Scanner sc = new Scanner(System.in);
+        String id;
         
+        id = sc.nextLine();
+        
+        for(Turma turma : turmas)
+        {
+            if(turma.GetId().equals(id))
+            {
+                turmas.remove(turma);
+                break;
+            }
+        }
     }
     void EditarTurma()
     {
+        Scanner sc = new Scanner(System.in);
+        char opt = 'D';
+        String id, Aux;
+        boolean turno;
+        int Serie;
         
+        id = sc.nextLine();
+        
+        for(Turma turma : turmas)
+        {
+            if(turma.GetId().equals(id))
+            {
+                do{
+                    System.out.println("------------Editar------------");
+                    System.out.println("1-Id");
+                    System.out.println("2-Serie");
+                    System.out.println("3-Professor");
+                    System.out.println("4-Turno");
+                    System.out.println("0-Sair");
+                    opt = sc.next().charAt(0);
+                }while(opt != '0' && opt != '1' && opt != '2' && opt != '3' && opt != '4');
+                
+                if(opt == '0')
+                {
+                    break;
+                }
+                
+                if(opt == '1')
+                {
+                    System.out.println("Novo ID:");
+                    Aux = sc.nextLine();
+                    turma.SetId(Aux);
+                }
+                
+                if(opt == '2')
+                {
+                    System.out.println("Nova Série:");
+                    Serie = sc.nextInt();
+                    turma.SetSerie(Serie);
+                }
+                
+                if(opt == '3')
+                {
+                    System.out.println("Novo professor:");
+                    Aux = sc.nextLine();
+                    for(Professor professor : professores)
+                    {
+                        if(professor.GetId().equals(Aux))
+                        {
+                            turma.SetProfessor(professor);
+                            break;
+                        }
+                    }
+                }
+                
+                if(opt == '4')
+                {
+                    System.out.println("Novo Turno:");
+                    turno = sc.nextBoolean();
+                    turma.SetTurno(turno);
+                }
+                
+                break;
+            }
+        }
     }
     void DadosTurma()
     {
+        Scanner sc = new Scanner(System.in);
+        int id;
         
-    }
-    
-    //Disciplina
-    void CadastrarDisciplina()
-    {
+        id = sc.nextInt();
         
-    }
-    void RemoverDisciplina()
-    {
-        
-    }
-    void EditarDisciplina()
-    {
-        
-    }
-    void DadosDisciplina()
-    {
-        
+        for(Turma turma : turmas)
+        {
+            if(turma.GetId().equals(id))
+            {
+                System.out.println("Id:" + turma.GetId());
+                System.out.println("Serie:" + turma.GetSerie());
+                System.out.println("Professor:" + turma.GetProfessor());
+                System.out.println("Turno:" + turma.GetTurno());
+                break;
+            }
+        }
     }
     
     //Outros
-    char MenuEditar()
+    char MenuEditarAlunoProf()
     {
         Scanner sc = new Scanner(System.in);
         char opt = 'D';
         System.out.println("------------Editar------------");
         System.out.println("1-Id");
-        System.out.println("2-Turma");
-        System.out.println("3-Nome");
-        System.out.println("4-CPF");
-        System.out.println("5-Data de Nascimento");
-        System.out.println("6-Responsável");
-        System.out.println("7-Telefone");
-        System.out.println("8-Endereço");
+        System.out.println("2-Nome");
+        System.out.println("3-Data de Nascimento");
+        System.out.println("4-Responsável");
+        System.out.println("5-Telefone");
+        System.out.println("6-Endereço");
         System.out.println("0-Sair");
         opt = sc.next().charAt(0);
         return opt;
     }
-    
-    
-    
-    
 }
