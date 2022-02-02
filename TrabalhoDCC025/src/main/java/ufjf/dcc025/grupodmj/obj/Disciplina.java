@@ -8,7 +8,7 @@ public class Disciplina
     String id, Nome;
     
     //Construtor
-    Disciplina(String id, String Nome)
+    public Disciplina(String id, String Nome)
     {
         this.id = id;
         this.Nome = Nome;

@@ -10,6 +10,7 @@ import ufjf.dcc025.grupodmj.obj.*;
 public class Login implements ActionListener
 {
     private Tela tela;
+    public static Admin admin;
     
     public Login(Tela tela)
     {
@@ -20,7 +21,8 @@ public class Login implements ActionListener
     {
         if(tela.GetUsuario().getText().equals("Admin") && tela.GetSenha().getText().equals("Admin"))
         {
-            tela.TelaAdmin();
+            admin = new Admin();
+            tela.TelaAdmin(admin);
         }
         
         //Aqui teria um if para ler no "banco de dados" um senha e usuario válido

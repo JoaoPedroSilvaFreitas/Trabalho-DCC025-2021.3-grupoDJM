@@ -9,14 +9,14 @@ public class Admin extends Usuario
     List<Professor> professores = new ArrayList<>();
     List<Turma> turmas = new ArrayList<>();
     
-    Admin()
+    public Admin()
     {
         this.Usuario = "Admin";
         this.Senha = "Admin";
     }
     
     //Aluno
-    void CadastrarAluno()
+    public void CadastrarAluno()
     {
         String Id, senha, Nome, DataDeNasc, Filiacao, Telefone, Endereco;
         Scanner sc = new Scanner(System.in);
@@ -33,7 +33,7 @@ public class Admin extends Usuario
         aluno = new Aluno(Id, senha, Nome, DataDeNasc, Filiacao, Telefone, Endereco);
         alunos.add(aluno);
     }
-    void RemoverAluno()
+    public void RemoverAluno()
     {
         Scanner sc = new Scanner(System.in);
         String id;
@@ -49,7 +49,7 @@ public class Admin extends Usuario
             }
         }
     }
-    void EditarAluno()
+    public void EditarAluno()
     {
         Scanner sc = new Scanner(System.in);
         String Aux, id, idaux;
@@ -116,7 +116,7 @@ public class Admin extends Usuario
             }
         }
     }
-    void DadosAluno()
+    public void DadosAluno()
     {
         Scanner sc = new Scanner(System.in);
         String id;
@@ -140,7 +140,7 @@ public class Admin extends Usuario
     }
     
     //Professor
-    void CadastrarProfessor()
+    public void CadastrarProfessor()
     {
         String Id, senha, Nome, DataDeNasc, Filiacao, Telefone, Endereco;
         Scanner sc = new Scanner(System.in);
@@ -157,7 +157,7 @@ public class Admin extends Usuario
         professor = new Professor(Id, senha, Nome, DataDeNasc, Filiacao, Telefone, Endereco);
         professores.add(professor);
     }
-    void RemoverProfessor()
+    public void RemoverProfessor()
     {
         Scanner sc = new Scanner(System.in);
         String id;
@@ -173,7 +173,7 @@ public class Admin extends Usuario
             }
         }
     }
-    void EditarProfessor()
+    public void EditarProfessor()
     {
         Scanner sc = new Scanner(System.in);
         String Aux, id, idaux;
@@ -240,7 +240,7 @@ public class Admin extends Usuario
             }
         }
     }
-    void DadosProfessor()
+    public void DadosProfessor()
     {
         Scanner sc = new Scanner(System.in);
         String id;
@@ -264,7 +264,7 @@ public class Admin extends Usuario
     }
     
     //Turma
-    void CadastrarTurma()
+    public void CadastrarTurma()
     {
         Scanner sc = new Scanner(System.in);
         Professor professor = null;
@@ -309,7 +309,7 @@ public class Admin extends Usuario
         }while(continuar == true);
         
     }
-    void RemoverTurma()
+    public void RemoverTurma()
     {
         Scanner sc = new Scanner(System.in);
         String id;
@@ -325,7 +325,7 @@ public class Admin extends Usuario
             }
         }
     }
-    void EditarTurma()
+    public void EditarTurma()
     {
         Scanner sc = new Scanner(System.in);
         char opt = 'D';
@@ -393,7 +393,7 @@ public class Admin extends Usuario
             }
         }
     }
-    void DadosTurma()
+    public void DadosTurma()
     {
         Scanner sc = new Scanner(System.in);
         int id;
@@ -414,7 +414,7 @@ public class Admin extends Usuario
     }
     
     //Outros
-    char MenuEditarAlunoProf()
+    private char MenuEditarAlunoProf()
     {
         Scanner sc = new Scanner(System.in);
         char opt = 'D';

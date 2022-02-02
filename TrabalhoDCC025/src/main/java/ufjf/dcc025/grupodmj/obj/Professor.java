@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Professor extends Membro
 {
     //Construtor
-    Professor(String Id, String Senha, String Nome, String DataDeNasc, String Filiacao, String Telefone, String Endereco)
+    public Professor(String Id, String Senha, String Nome, String DataDeNasc, String Filiacao, String Telefone, String Endereco)
     {
         this.Id = Id;
         this.Nome = Nome;
