@@ -42,6 +42,8 @@ public class Tela extends JFrame
     private JList<Professor> Professores;
     private JList<Turma> Turmas;
     
+    private int LastId;
+    
     Tela()
     {
         super("Sistema de controle escolar");
@@ -404,6 +406,72 @@ public class Tela extends JFrame
         Titulo.setFont(new Font("Arial", Font.PLAIN, 120));
         this.painelEditarAluno.add(Titulo, BorderLayout.NORTH);
         
+        Alunos.setVisible(true);
+        Alunos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.painelEditarAluno.add(new JScrollPane(Alunos), BorderLayout.WEST);
+        
+        JPanel painelFuncoes = new JPanel();
+        painelFuncoes.setLayout(new GridLayout(0,2));
+        painelFuncoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+        
+        JLabel Id = new JLabel("Id:", SwingConstants.CENTER);
+        Id.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Id);
+        CadastrarIdAluno = new JTextField(25);
+        CadastrarIdAluno.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarIdAluno);
+        
+        JLabel Nome = new JLabel("Nome:", SwingConstants.CENTER);
+        Nome.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Nome);
+        CadastrarNomeAluno = new JTextField(100);
+        CadastrarNomeAluno.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarNomeAluno);
+        
+        JLabel Senha = new JLabel("Senha:", SwingConstants.CENTER);
+        Senha.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Senha);
+        CadastrarSenhaAluno = new JTextField(20);
+        CadastrarSenhaAluno.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarSenhaAluno);
+        
+        JLabel DataDeNasc = new JLabel("Data de Nascimento:", SwingConstants.CENTER);
+        DataDeNasc.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(DataDeNasc);
+        CadastrarDataAluno = new JTextField(20);
+        CadastrarDataAluno.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarDataAluno);
+        
+        JLabel Filiacao = new JLabel("Pais ou responsável:", SwingConstants.CENTER);
+        Filiacao.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Filiacao);
+        CadastrarFiliacaoAluno = new JTextField(100);
+        CadastrarFiliacaoAluno.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarFiliacaoAluno);
+        
+        JLabel Telefone = new JLabel("Telefone:", SwingConstants.CENTER);
+        Telefone.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Telefone);
+        CadastrarTelefoneAluno = new JTextField(100);
+        CadastrarTelefoneAluno.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarTelefoneAluno);
+        
+        JLabel Endereco = new JLabel("Endereço:", SwingConstants.CENTER);
+        Endereco.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Endereco);
+        CadastrarEnderecoAluno = new JTextField(100);
+        CadastrarEnderecoAluno.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarEnderecoAluno);
+        
+        this.painelEditarAluno.add(painelFuncoes, BorderLayout.CENTER);
+        
+        Alunos.addListSelectionListener(new InfoListaAluno(this));
+        
+        JButton EditarBtn;
+        EditarBtn = new JButton("Editar");
+        EditarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        EditarBtn.addActionListener(new ConfirmaEditaAluno(this));
+        this.painelEditarAluno.add(EditarBtn,BorderLayout.EAST);
         
         JButton VoltarBtn;
         VoltarBtn = new JButton("Voltar");
@@ -469,8 +537,52 @@ public class Tela extends JFrame
         this.senha = senha;
     }
     
+    public void SetLastId(int LastId)
+    {
+        this.LastId = LastId;
+    }
+    
+    public void SetCadastrarIdAluno(JTextField CadastrarIdAluno)
+    {
+       this.CadastrarIdAluno = CadastrarIdAluno;
+    }
+    
+    public void SetCadastrarNomeAluno(JTextField CadastrarNomeAluno)
+    {
+        this.CadastrarNomeAluno = CadastrarNomeAluno;
+    }
+    
+    public void SetCadastrarSenhaAluno(JTextField CadastrarSenhaAluno)
+    {
+        this.CadastrarSenhaAluno = CadastrarSenhaAluno;
+    }
+    
+    public void SetCadastrarDataAluno(JTextField CadastrarDataAluno)
+    {
+        this.CadastrarDataAluno = CadastrarDataAluno;
+    }
+    
+    public void SetCadastrarFiliacaoAluno(JTextField CadastrarFiliacaoAluno)
+    {
+        this.CadastrarFiliacaoAluno = CadastrarFiliacaoAluno;
+    }
+    
+    public void SetCadastrarTelefoneAluno(JTextField CadastrarTelefoneAluno)
+    {
+        this.CadastrarTelefoneAluno = CadastrarTelefoneAluno;
+    }
+    
+    public void SetCadastrarEnderecoAluno(JTextField CadastrarEnderecoAluno)
+    {
+        this.CadastrarEnderecoAluno = CadastrarEnderecoAluno;
+    }
     
     //Getters
+    public int GetLastId()
+    {
+        return this.LastId;
+    }
+    
     public JList<Aluno> GetAlunos() 
     {
         return Alunos;

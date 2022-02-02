@@ -7,73 +7,73 @@ abstract class Membro extends Usuario
     Turma Turma;
     
     //Getters
-    String GetId()
+    public String GetId()
     {
         return this.Id;
     }
     
-    String GetNome()
+    public String GetNome()
     {
         return this.Nome;
     }
     
-    String GetDataDeNasc()
+    public String GetDataDeNasc()
     {
         return this.DataDeNasc;
     }
     
-    String GetFiliacao()
+    public String GetFiliacao()
     {
         return this.Filiacao;
     }
     
-    String GetTelefone()
+    public String GetTelefone()
     {
         return this.Telefone;
     }
     
-    String GetEndereco()
+    public String GetEndereco()
     {
         return this.Endereco;
     }
             
-    Turma GetTurma()
+    public Turma GetTurma()
     {
         return this.Turma;
     }
     
     //Setters
-    void SetId(String Id)
+    public void SetId(String Id)
     {
         this.Id = Id;
     }
     
-    void SetNome(String Nome)
+    public void SetNome(String Nome)
     {
         this.Nome = Nome;
     }
     
-    void SetDataDeNasc(String DataDeNasc)
+    public void SetDataDeNasc(String DataDeNasc)
     {
         this.DataDeNasc = DataDeNasc;
     }
     
-    void SetFiliacao(String Filiacao)
+    public void SetFiliacao(String Filiacao)
     {
         this.Filiacao = Filiacao;
     }
     
-    void SetTelefone(String Telefone)
+    public void SetTelefone(String Telefone)
     {
         this.Telefone = Telefone;
     }
     
-    void SetEndereco(String Endereco)
+    public void SetEndereco(String Endereco)
     {
         this.Endereco = Endereco;
     }
             
-    void SetTurma(Turma Turma)
+    public void SetTurma(Turma Turma)
     {
         this.Turma = Turma;
     }
