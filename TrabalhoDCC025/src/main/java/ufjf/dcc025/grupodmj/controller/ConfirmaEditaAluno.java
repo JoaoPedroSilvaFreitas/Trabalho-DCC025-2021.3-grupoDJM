@@ -9,7 +9,7 @@ import ufjf.dcc025.grupodmj.obj.*;
 
 public class ConfirmaEditaAluno implements ActionListener 
 {
-     private Tela tela;
+    private Tela tela;
     
     public ConfirmaEditaAluno(Tela tela)
     {

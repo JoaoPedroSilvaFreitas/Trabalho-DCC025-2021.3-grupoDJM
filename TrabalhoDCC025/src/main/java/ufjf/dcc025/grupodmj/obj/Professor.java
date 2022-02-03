@@ -104,4 +104,11 @@ public class Professor extends Membro
         }
     }
     
+     //toString
+    @Override
+    public String toString()
+    {
+        return this.Id + "  " + this.Nome + "   " + this.DataDeNasc + " " + this.Filiacao + "   " + this.Telefone + "   " + this.Endereco;
+    }
+    
 }

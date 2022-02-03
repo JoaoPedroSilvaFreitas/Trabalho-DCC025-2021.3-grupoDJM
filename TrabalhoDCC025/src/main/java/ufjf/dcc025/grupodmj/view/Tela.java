@@ -13,6 +13,8 @@ public class Tela extends JFrame
     
     
     private JPanel painelCadastrarAluno;
+    private JPanel painelRemoverAluno;
+    private JPanel painelEditarAluno;
     private JTextField CadastrarIdAluno;
     private JTextField CadastrarNomeAluno;
     private JTextField CadastrarSenhaAluno;
@@ -22,16 +24,18 @@ public class Tela extends JFrame
     private JTextField CadastrarEnderecoAluno;
     
     private JPanel painelCadastrarProfessor;
-    private JPanel painelCadastrarTurma;
-    
-    
-    private JPanel painelRemoverAluno;
     private JPanel painelRemoverProfessor;
-    private JPanel painelRemoverTurma;
-    
-    
-    private JPanel painelEditarAluno;
     private JPanel painelEditarProfessor;
+    private JTextField CadastrarIdProfessor;
+    private JTextField CadastrarNomeProfessor;
+    private JTextField CadastrarSenhaProfessor;
+    private JTextField CadastrarDataProfessor;
+    private JTextField CadastrarFiliacaoProfessor;
+    private JTextField CadastrarTelefoneProfessor;
+    private JTextField CadastrarEnderecoProfessor;
+    
+    private JPanel painelCadastrarTurma;
+    private JPanel painelRemoverTurma;
     private JPanel painelEditarTurma;
     
     
@@ -47,6 +51,13 @@ public class Tela extends JFrame
     Tela()
     {
         super("Sistema de controle escolar");
+        DefaultListModel<Aluno> modelAluno = new DefaultListModel<>();
+        Alunos = new JList<>(modelAluno);
+        DefaultListModel<Professor> modelProfessor = new DefaultListModel<>();
+        Professores = new JList<>(modelProfessor);
+        DefaultListModel<Turma> modelTurma = new DefaultListModel<>();
+        Turmas = new JList<>(modelTurma);
+        
     }
     
     public void TelaPrincipal()
@@ -58,12 +69,7 @@ public class Tela extends JFrame
         this.painelPrincipal.setLayout(new BorderLayout());
         this.painelPrincipal.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
         
-        DefaultListModel<Aluno> modelAluno = new DefaultListModel<>();
-        Alunos = new JList<>(modelAluno);
-        DefaultListModel<Professor> modelProfessor = new DefaultListModel<>();
-        Professores = new JList<>(modelProfessor);
-        DefaultListModel<Turma> modelTurma = new DefaultListModel<>();
-        Turmas = new JList<>(modelTurma);
+        
         
         TelaLogin();
         
@@ -480,22 +486,233 @@ public class Tela extends JFrame
         this.painelEditarAluno.add(VoltarBtn,BorderLayout.SOUTH);
     }
     
-    
-    
-    
     public void TelaAdminCadastrarProfessor()
     {
+        VisibilidadeTelaAdmin();
+        this.setSize(1280,720);
+        this.setVisible(true);
         
+        this.painelCadastrarProfessor = new JPanel();
+        this.painelCadastrarProfessor.setLayout(new BorderLayout());
+        this.painelCadastrarProfessor.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+        
+        TelaAdminCadastrarProfessorAux();
+        
+        this.add(this.painelCadastrarProfessor);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.repaint();
+    }
+    
+    private void TelaAdminCadastrarProfessorAux()
+    {
+        JLabel Titulo = new JLabel("CADASTRAR PROFESSOR", SwingConstants.CENTER);
+        Titulo.setFont(new Font("Arial", Font.PLAIN, 95));
+        this.painelCadastrarProfessor.add(Titulo, BorderLayout.NORTH);
+        
+        JButton VoltarBtn;
+        VoltarBtn = new JButton("Voltar");
+        VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        VoltarBtn.addActionListener(new VoltarAdminProfessor(this,1));
+        this.painelCadastrarProfessor.add(VoltarBtn,BorderLayout.SOUTH);
+        
+        JPanel painelFuncoes;
+        painelFuncoes = new JPanel();
+        painelFuncoes.setLayout(new GridLayout(0,2));
+        painelFuncoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+        
+        JLabel Id = new JLabel("Id:", SwingConstants.CENTER);
+        Id.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Id);
+        CadastrarIdProfessor = new JTextField(25);
+        CadastrarIdProfessor.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarIdProfessor);
+        
+        JLabel Nome = new JLabel("Nome:", SwingConstants.CENTER);
+        Nome.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Nome);
+        CadastrarNomeProfessor = new JTextField(100);
+        CadastrarNomeProfessor.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarNomeProfessor);
+        
+        JLabel Senha = new JLabel("Senha:", SwingConstants.CENTER);
+        Senha.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Senha);
+        CadastrarSenhaProfessor = new JTextField(20);
+        CadastrarSenhaProfessor.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarSenhaProfessor);
+        
+        JLabel DataDeNasc = new JLabel("Data de Nascimento:", SwingConstants.CENTER);
+        DataDeNasc.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(DataDeNasc);
+        CadastrarDataProfessor = new JTextField(20);
+        CadastrarDataProfessor.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarDataProfessor);
+        
+        JLabel Filiacao = new JLabel("Pais ou responsável:", SwingConstants.CENTER);
+        Filiacao.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Filiacao);
+        CadastrarFiliacaoProfessor = new JTextField(100);
+        CadastrarFiliacaoProfessor.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarFiliacaoProfessor);
+        
+        JLabel Telefone = new JLabel("Telefone:", SwingConstants.CENTER);
+        Telefone.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Telefone);
+        CadastrarTelefoneProfessor = new JTextField(100);
+        CadastrarTelefoneProfessor.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarTelefoneProfessor);
+        
+        JLabel Endereco = new JLabel("Endereço:", SwingConstants.CENTER);
+        Endereco.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Endereco);
+        CadastrarEnderecoProfessor = new JTextField(100);
+        CadastrarEnderecoProfessor.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarEnderecoProfessor);
+        
+        JButton CadastrarBtn;
+        CadastrarBtn = new JButton("Cadastrar");
+        CadastrarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        CadastrarBtn.addActionListener(new ConfirmaCadastroProfessor(this));
+        this.painelCadastrarProfessor.add(CadastrarBtn,BorderLayout.EAST);
+        
+        this.painelCadastrarProfessor.add(painelFuncoes, BorderLayout.CENTER);
     }
     
     public void TelaAdminRemoverProfessor()
     {
+        VisibilidadeTelaAdmin();
+        this.setSize(1280,720);
+        this.setVisible(true);
         
+        this.painelRemoverProfessor = new JPanel();
+        this.painelRemoverProfessor.setLayout(new BorderLayout());
+        this.painelRemoverProfessor.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+        
+        TelaAdminRemoverProfessorAux();
+        
+        this.add(this.painelRemoverProfessor);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.repaint();
+    }
+    
+    private void TelaAdminRemoverProfessorAux()
+    {
+        Professores.setVisible(true);
+        Professores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.painelRemoverProfessor.add(new JScrollPane(Professores), BorderLayout.CENTER);
+        
+        JLabel Titulo = new JLabel("REMOVER PROFESSOR", SwingConstants.CENTER);
+        Titulo.setFont(new Font("Arial", Font.PLAIN, 100));
+        this.painelRemoverProfessor.add(Titulo, BorderLayout.NORTH);
+        
+        JButton RemoverBtn;
+        RemoverBtn = new JButton("Remover");
+        RemoverBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        RemoverBtn.addActionListener(new ConfirmaRemoveProfessor(this));
+        this.painelRemoverProfessor.add(RemoverBtn,BorderLayout.EAST);
+        
+        JButton VoltarBtn;
+        VoltarBtn = new JButton("Voltar");
+        VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        VoltarBtn.addActionListener(new VoltarAdminProfessor(this,2));
+        this.painelRemoverProfessor.add(VoltarBtn,BorderLayout.SOUTH);
     }
     
     public void TelaAdminEditarProfessor()
     {
+        VisibilidadeTelaAdmin();
+        this.setSize(1280,720);
+        this.setVisible(true);
         
+        this.painelEditarProfessor = new JPanel();
+        this.painelEditarProfessor.setLayout(new BorderLayout());
+        this.painelEditarProfessor.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+        
+        TelaAdminEditarProfessorAux();
+        
+        this.add(this.painelEditarProfessor);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.repaint();
+    }
+    
+    private void TelaAdminEditarProfessorAux()
+    {
+        JLabel Titulo = new JLabel("EDITAR PROFESSOR", SwingConstants.CENTER);
+        Titulo.setFont(new Font("Arial", Font.PLAIN, 100));
+        this.painelEditarProfessor.add(Titulo, BorderLayout.NORTH);
+        
+        Professores.setVisible(true);
+        Professores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.painelEditarProfessor.add(new JScrollPane(Professores), BorderLayout.WEST);
+        
+        JPanel painelFuncoes = new JPanel();
+        painelFuncoes.setLayout(new GridLayout(0,2));
+        painelFuncoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+        
+        JLabel Id = new JLabel("Id:", SwingConstants.CENTER);
+        Id.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Id);
+        CadastrarIdProfessor = new JTextField(25);
+        CadastrarIdProfessor.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarIdProfessor);
+        
+        JLabel Nome = new JLabel("Nome:", SwingConstants.CENTER);
+        Nome.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Nome);
+        CadastrarNomeProfessor = new JTextField(100);
+        CadastrarNomeProfessor.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarNomeProfessor);
+        
+        JLabel Senha = new JLabel("Senha:", SwingConstants.CENTER);
+        Senha.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Senha);
+        CadastrarSenhaProfessor = new JTextField(20);
+        CadastrarSenhaProfessor.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarSenhaProfessor);
+        
+        JLabel DataDeNasc = new JLabel("Data de Nascimento:", SwingConstants.CENTER);
+        DataDeNasc.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(DataDeNasc);
+        CadastrarDataProfessor = new JTextField(20);
+        CadastrarDataProfessor.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarDataProfessor);
+        
+        JLabel Filiacao = new JLabel("Pais ou responsável:", SwingConstants.CENTER);
+        Filiacao.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Filiacao);
+        CadastrarFiliacaoProfessor = new JTextField(100);
+        CadastrarFiliacaoProfessor.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarFiliacaoProfessor);
+        
+        JLabel Telefone = new JLabel("Telefone:", SwingConstants.CENTER);
+        Telefone.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Telefone);
+        CadastrarTelefoneProfessor = new JTextField(100);
+        CadastrarTelefoneProfessor.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarTelefoneProfessor);
+        
+        JLabel Endereco = new JLabel("Endereço:", SwingConstants.CENTER);
+        Endereco.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Endereco);
+        CadastrarEnderecoProfessor = new JTextField(100);
+        CadastrarEnderecoProfessor.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarEnderecoProfessor);
+        
+        this.painelEditarProfessor.add(painelFuncoes, BorderLayout.CENTER);
+        
+        Professores.addListSelectionListener(new InfoListaProfessor(this));
+        
+        JButton EditarBtn;
+        EditarBtn = new JButton("Editar");
+        EditarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        EditarBtn.addActionListener(new ConfirmaEditaProfessor(this));
+        this.painelEditarProfessor.add(EditarBtn,BorderLayout.EAST);
+        
+        JButton VoltarBtn;
+        VoltarBtn = new JButton("Voltar");
+        VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        VoltarBtn.addActionListener(new VoltarAdminProfessor(this,3));
+        this.painelEditarProfessor.add(VoltarBtn,BorderLayout.SOUTH);
     }
     
     public void TelaAdminCadastrarTurma()
@@ -577,6 +794,41 @@ public class Tela extends JFrame
         this.CadastrarEnderecoAluno = CadastrarEnderecoAluno;
     }
     
+    public void SetCadastrarIdProfessor(JTextField CadastrarIdProfessor)
+    {
+       this.CadastrarIdProfessor = CadastrarIdProfessor;
+    }
+    
+    public void SetCadastrarNomeProfessor(JTextField CadastrarNomeProfessor)
+    {
+        this.CadastrarNomeProfessor = CadastrarNomeProfessor;
+    }
+    
+    public void SetCadastrarSenhaProfessor(JTextField CadastrarSenhaProfessor)
+    {
+        this.CadastrarSenhaProfessor = CadastrarSenhaProfessor;
+    }
+    
+    public void SetCadastrarDataProfessor(JTextField CadastrarDataProfessor)
+    {
+        this.CadastrarDataProfessor = CadastrarDataProfessor;
+    }
+    
+    public void SetCadastrarFiliacaoProfessor(JTextField CadastrarFiliacaoProfessor)
+    {
+        this.CadastrarFiliacaoProfessor = CadastrarFiliacaoProfessor;
+    }
+    
+    public void SetCadastrarTelefoneProfessor(JTextField CadastrarTelefoneProfessor)
+    {
+        this.CadastrarTelefoneProfessor = CadastrarTelefoneProfessor;
+    }
+    
+    public void SetCadastrarEnderecoProfessor(JTextField CadastrarEnderecoProfessor)
+    {
+        this.CadastrarEnderecoProfessor = CadastrarEnderecoProfessor;
+    }
+    
     //Getters
     public int GetLastId()
     {
@@ -586,6 +838,11 @@ public class Tela extends JFrame
     public JList<Aluno> GetAlunos() 
     {
         return Alunos;
+    }
+    
+    public JList<Professor> GetProfessores() 
+    {
+        return Professores;
     }
     
     public JTextField GetUsuario()
@@ -633,6 +890,40 @@ public class Tela extends JFrame
         return this.CadastrarEnderecoAluno;
     }
     
+    public JTextField GetCadastrarIdProfessor()
+    {
+        return this.CadastrarIdProfessor;
+    }
+    
+    public JTextField GetCadastrarNomeProfessor()
+    {
+        return this.CadastrarNomeProfessor;
+    }
+    
+    public JTextField GetCadastrarSenhaProfessor()
+    {
+        return this.CadastrarSenhaProfessor;
+    }
+    
+    public JTextField GetCadastrarDataProfessor()
+    {
+        return this.CadastrarDataProfessor;
+    }
+    
+    public JTextField GetCadastrarFiliacaoProfessor()
+    {
+        return this.CadastrarFiliacaoProfessor;
+    }
+    
+    public JTextField GetCadastrarTelefoneProfessor()
+    {
+        return this.CadastrarTelefoneProfessor;
+    }
+    
+    public JTextField GetCadastrarEnderecoProfessor()
+    {
+        return this.CadastrarEnderecoProfessor;
+    }
     
     //Altera visibilidade
     public void VisibilidadeTelaAdmin()
