@@ -10,10 +10,12 @@ import ufjf.dcc025.grupodmj.obj.*;
 public class InfoListaAluno implements ListSelectionListener
 {
     private Tela tela;
+    private int ListaId;
 
-    public InfoListaAluno(Tela tela) 
+    public InfoListaAluno(Tela tela,int ListaId) 
     {
         this.tela = tela;
+        this.ListaId = ListaId;
     }
     
     public void valueChanged(ListSelectionEvent e) 
@@ -23,16 +25,26 @@ public class InfoListaAluno implements ListSelectionListener
         
         if(id != -1)
         {
-            Aluno aluno = tela.GetAlunos().getModel().getElementAt(id);
+            if(ListaId == 0)
+            {
+                Aluno aluno = tela.GetAlunos().getModel().getElementAt(id);
             
-            tela.GetCadastrarIdAluno().setText(aluno.GetId());
-            tela.GetCadastrarNomeAluno().setText(aluno.GetNome());
-            tela.GetCadastrarDataAluno().setText(aluno.GetDataDeNasc());
-            tela.GetCadastrarFiliacaoAluno().setText(aluno.GetFiliacao());
-            tela.GetCadastrarTelefoneAluno().setText(aluno.GetTelefone());
-            tela.GetCadastrarEnderecoAluno().setText(aluno.GetEndereco());
+                tela.GetCadastrarIdAluno().setText(aluno.GetId());
+                tela.GetCadastrarNomeAluno().setText(aluno.GetNome());
+                tela.GetCadastrarDataAluno().setText(aluno.GetDataDeNasc());
+                tela.GetCadastrarFiliacaoAluno().setText(aluno.GetFiliacao());
+                tela.GetCadastrarTelefoneAluno().setText(aluno.GetTelefone());
+                tela.GetCadastrarEnderecoAluno().setText(aluno.GetEndereco());
             
-            tela.SetLastId(id);
+                tela.SetLastId(id);
+            }
+            
+            if(ListaId == 1)
+            {
+                Aluno aluno = tela.GetAlunos().getModel().getElementAt(id);
+                tela.GetCadastrarIdAluno().setText(aluno.GetId());
+                tela.SetLastId(id);
+            }
             
         }
     }

@@ -8,13 +8,11 @@ public class Turma
     //Atributos
     List<Disciplina> disciplinas = new ArrayList<>();
     List<Aluno> alunos = new ArrayList<>();
-    String id, Titulo, Horario; //PROVAVELMENTE PRECISAREI ALTERAR NO FUTURO
+    String id, Serie, Turno;
     Professor professor;
-    int Serie;
-    Boolean Turno;
     
     //Construtor
-    Turma(String id, int Serie, Professor professor, Boolean Turno)
+    public Turma(String id, String Serie, String Turno,Professor professor )
     {
         this.id = id;
         this.Serie = Serie;
@@ -23,19 +21,19 @@ public class Turma
     }
     
     //Adiciona alunos na turma
-    void AddAluno(Aluno aluno)
+    public void AddAluno(Aluno aluno)
     {
         alunos.add(aluno);
     }
     
     //Adiciona disciplinas na turma
-    void AddDisciplina(Disciplina disciplina)
+    public void AddDisciplina(Disciplina disciplina)
     {
         disciplinas.add(disciplina);
     }
     
     //retorna aluno da turma
-    Aluno GetAluno(String Id)
+    public Aluno GetAluno(String Id)
     {
         for(Aluno aluno : alunos)
         {
@@ -48,63 +46,50 @@ public class Turma
     }
     
     //Edita Professor da turma
-    void SetProfessor(Professor professor)
+    public void SetProfessor(Professor professor)
     {
         this.professor = professor;
     }
     
     //Setters
-    void SetId(String id)
+    public void SetId(String id)
     {
         this.id = id;
     }
     
-    void SetSerie(int Serie)
+    public void SetSerie(String Serie)
     {
         this.Serie = Serie;
     }
     
-    void SetTurno(Boolean Turno)
+    public void SetTurno(String Turno)
     {
         this.Turno = Turno;
     }
     
-    void SetHorario(String Horario)
-    {
-        this.Horario = Horario;
-    }
-    
     //Getters
-    String GetId()
+    public String GetId()
     {
         return this.id;
     }
     
-    int GetSerie()
+    public String GetSerie()
     {
         return this.Serie;
     }
     
-    Professor GetProfessor()
+    public Professor GetProfessor()
     {
         return this.professor;
     }
     
-    String GetTurno()
+    public String GetTurno()
     {
-        if(Turno == true)
-        {
-            return "Matutino";
-        }
-        else
-            {
-                return "Vespertino";
-            } 
+        return this.Turno;
     }
     
-    String GetHorario()
+    public String toString()
     {
-        return this.Horario;
+        return this.id + "  " + this.Serie + "   " + this.Turno + "   " + this.professor.GetNome();
     }
-    
 }

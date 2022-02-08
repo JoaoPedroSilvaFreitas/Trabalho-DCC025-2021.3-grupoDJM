@@ -6,19 +6,17 @@ import javax.swing.JOptionPane;
 import ufjf.dcc025.grupodmj.view.*;
 import ufjf.dcc025.grupodmj.obj.*;
 
-
-public class VoltarAdminEditarAluno implements ActionListener
+public class AddAlunoTurma implements ActionListener
 {
     private Tela tela;
     
-    public VoltarAdminEditarAluno(Tela tela)
+    public AddAlunoTurma(Tela tela)
     {
         this.tela = tela;
     }
     
     public void actionPerformed(ActionEvent e)
     {
-        tela.VisibilidadeTelaEditarAluno();
-        tela.TelaAdmin(Login.admin);
+        tela.TelaAddAlunoTurma();
     }
 }

@@ -9,7 +9,9 @@ public class Tela extends JFrame
 {
     private JPanel painelPrincipal;
     private JPanel painelAdmin;
+    private JPanel painelProfessor;
     private JPanel painelLogin;
+    private JPanel painelAddAlunoTurma;
     
     
     private JPanel painelCadastrarAluno;
@@ -37,6 +39,10 @@ public class Tela extends JFrame
     private JPanel painelCadastrarTurma;
     private JPanel painelRemoverTurma;
     private JPanel painelEditarTurma;
+    private JTextField CadastrarIdTurma;
+    private JTextField CadastrarSerieTurma;
+    private JTextField CadastrarTurnoTurma;
+    private JTextField CadastrarProfessorTurma;
     
     
     private JTextField usuario;
@@ -69,10 +75,7 @@ public class Tela extends JFrame
         this.painelPrincipal.setLayout(new BorderLayout());
         this.painelPrincipal.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
         
-        
-        
         TelaLogin();
-        
         
         this.add(this.painelPrincipal);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -164,7 +167,7 @@ public class Tela extends JFrame
         JButton SairBtn;
         SairBtn = new JButton("Sair");
         SairBtn.setFont(new Font("Arial", Font.PLAIN, 26));
-        SairBtn.addActionListener(new Sair(this));
+        SairBtn.addActionListener(new Sair(this,1));
         this.painelAdmin.add(SairBtn,BorderLayout.SOUTH);
         
         JLabel adminTitulo = new JLabel("ADMIN", SwingConstants.CENTER);
@@ -281,7 +284,7 @@ public class Tela extends JFrame
         JButton VoltarBtn;
         VoltarBtn = new JButton("Voltar");
         VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
-        VoltarBtn.addActionListener(new VoltarAdminCadastraAluno(this));
+        VoltarBtn.addActionListener(new Voltar(this,4));
         this.painelCadastrarAluno.add(VoltarBtn,BorderLayout.SOUTH);
         
         JPanel painelFuncoes;
@@ -384,7 +387,7 @@ public class Tela extends JFrame
         JButton VoltarBtn;
         VoltarBtn = new JButton("Voltar");
         VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
-        VoltarBtn.addActionListener(new VoltarAdminRemoverAluno(this));
+        VoltarBtn.addActionListener(new Voltar(this,6));
         this.painelRemoverAluno.add(VoltarBtn,BorderLayout.SOUTH);
         
     }
@@ -434,12 +437,14 @@ public class Tela extends JFrame
         CadastrarNomeAluno.setFont(new Font("Arial", Font.PLAIN, 22));
         painelFuncoes.add(CadastrarNomeAluno);
         
+        /*
         JLabel Senha = new JLabel("Senha:", SwingConstants.CENTER);
         Senha.setFont(new Font("Arial", Font.PLAIN, 22));
         painelFuncoes.add(Senha);
         CadastrarSenhaAluno = new JTextField(20);
         CadastrarSenhaAluno.setFont(new Font("Arial", Font.PLAIN, 22));
         painelFuncoes.add(CadastrarSenhaAluno);
+        */
         
         JLabel DataDeNasc = new JLabel("Data de Nascimento:", SwingConstants.CENTER);
         DataDeNasc.setFont(new Font("Arial", Font.PLAIN, 22));
@@ -471,7 +476,7 @@ public class Tela extends JFrame
         
         this.painelEditarAluno.add(painelFuncoes, BorderLayout.CENTER);
         
-        Alunos.addListSelectionListener(new InfoListaAluno(this));
+        Alunos.addListSelectionListener(new InfoListaAluno(this, 0));
         
         JButton EditarBtn;
         EditarBtn = new JButton("Editar");
@@ -482,7 +487,7 @@ public class Tela extends JFrame
         JButton VoltarBtn;
         VoltarBtn = new JButton("Voltar");
         VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
-        VoltarBtn.addActionListener(new VoltarAdminEditarAluno(this));
+        VoltarBtn.addActionListener(new Voltar(this,5));
         this.painelEditarAluno.add(VoltarBtn,BorderLayout.SOUTH);
     }
     
@@ -512,7 +517,7 @@ public class Tela extends JFrame
         JButton VoltarBtn;
         VoltarBtn = new JButton("Voltar");
         VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
-        VoltarBtn.addActionListener(new VoltarAdminProfessor(this,1));
+        VoltarBtn.addActionListener(new Voltar(this,1));
         this.painelCadastrarProfessor.add(VoltarBtn,BorderLayout.SOUTH);
         
         JPanel painelFuncoes;
@@ -548,7 +553,7 @@ public class Tela extends JFrame
         CadastrarDataProfessor.setFont(new Font("Arial", Font.PLAIN, 22));
         painelFuncoes.add(CadastrarDataProfessor);
         
-        JLabel Filiacao = new JLabel("Pais ou responsável:", SwingConstants.CENTER);
+        JLabel Filiacao = new JLabel("Filiação:", SwingConstants.CENTER);
         Filiacao.setFont(new Font("Arial", Font.PLAIN, 22));
         painelFuncoes.add(Filiacao);
         CadastrarFiliacaoProfessor = new JTextField(100);
@@ -614,7 +619,7 @@ public class Tela extends JFrame
         JButton VoltarBtn;
         VoltarBtn = new JButton("Voltar");
         VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
-        VoltarBtn.addActionListener(new VoltarAdminProfessor(this,2));
+        VoltarBtn.addActionListener(new Voltar(this,2));
         this.painelRemoverProfessor.add(VoltarBtn,BorderLayout.SOUTH);
     }
     
@@ -663,12 +668,14 @@ public class Tela extends JFrame
         CadastrarNomeProfessor.setFont(new Font("Arial", Font.PLAIN, 22));
         painelFuncoes.add(CadastrarNomeProfessor);
         
+        /*
         JLabel Senha = new JLabel("Senha:", SwingConstants.CENTER);
         Senha.setFont(new Font("Arial", Font.PLAIN, 22));
         painelFuncoes.add(Senha);
         CadastrarSenhaProfessor = new JTextField(20);
         CadastrarSenhaProfessor.setFont(new Font("Arial", Font.PLAIN, 22));
         painelFuncoes.add(CadastrarSenhaProfessor);
+        */
         
         JLabel DataDeNasc = new JLabel("Data de Nascimento:", SwingConstants.CENTER);
         DataDeNasc.setFont(new Font("Arial", Font.PLAIN, 22));
@@ -677,7 +684,7 @@ public class Tela extends JFrame
         CadastrarDataProfessor.setFont(new Font("Arial", Font.PLAIN, 22));
         painelFuncoes.add(CadastrarDataProfessor);
         
-        JLabel Filiacao = new JLabel("Pais ou responsável:", SwingConstants.CENTER);
+        JLabel Filiacao = new JLabel("Filiação:", SwingConstants.CENTER);
         Filiacao.setFont(new Font("Arial", Font.PLAIN, 22));
         painelFuncoes.add(Filiacao);
         CadastrarFiliacaoProfessor = new JTextField(100);
@@ -711,31 +718,302 @@ public class Tela extends JFrame
         JButton VoltarBtn;
         VoltarBtn = new JButton("Voltar");
         VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
-        VoltarBtn.addActionListener(new VoltarAdminProfessor(this,3));
+        VoltarBtn.addActionListener(new Voltar(this,3));
         this.painelEditarProfessor.add(VoltarBtn,BorderLayout.SOUTH);
     }
     
     public void TelaAdminCadastrarTurma()
     {
+        VisibilidadeTelaAdmin();
+        this.setSize(1280,720);
+        this.setVisible(true);
         
+        this.painelCadastrarTurma = new JPanel();
+        this.painelCadastrarTurma.setLayout(new BorderLayout());
+        this.painelCadastrarTurma.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+        
+        TelaAdminCadastrarTurmaAux();
+        
+        this.add(this.painelCadastrarTurma);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.repaint();
+    }
+    
+    private void TelaAdminCadastrarTurmaAux()
+    {
+        JLabel Titulo = new JLabel("CADASTRAR TURMA", SwingConstants.CENTER);
+        Titulo.setFont(new Font("Arial", Font.PLAIN, 120));
+        this.painelCadastrarTurma.add(Titulo, BorderLayout.NORTH);
+        
+        JPanel painelBotoes;
+        painelBotoes = new JPanel();
+        painelBotoes.setLayout(new GridLayout(0,2));
+        
+        JButton VoltarBtn;
+        VoltarBtn = new JButton("Voltar");
+        VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        VoltarBtn.addActionListener(new Voltar(this,7));
+        //this.painelCadastrarTurma.add(VoltarBtn,BorderLayout.SOUTH);
+        
+        JButton CadastrarBtn;
+        CadastrarBtn = new JButton("Cadastrar");
+        CadastrarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        CadastrarBtn.addActionListener(new ConfirmaCadastroTurma(this));
+        this.painelCadastrarTurma.add(CadastrarBtn,BorderLayout.EAST);
+        
+        JPanel painelFuncoes;
+        painelFuncoes = new JPanel();
+        painelFuncoes.setLayout(new GridLayout(0,2));
+        painelFuncoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+        
+        //Adicionar aqui JTextField
+        JLabel Id = new JLabel("Id:", SwingConstants.CENTER);
+        Id.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Id);
+        CadastrarIdTurma = new JTextField(25);
+        CadastrarIdTurma.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarIdTurma);
+        
+        JLabel Serie = new JLabel("Serie:", SwingConstants.CENTER);
+        Serie.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Serie);
+        CadastrarSerieTurma = new JTextField(25);
+        CadastrarSerieTurma.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarSerieTurma);
+        
+        JLabel Turno = new JLabel("Turno:", SwingConstants.CENTER);
+        Turno.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Turno);
+        CadastrarTurnoTurma = new JTextField(25);
+        CadastrarTurnoTurma.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarTurnoTurma);
+        
+        JLabel Prof = new JLabel("Professor(Id):", SwingConstants.CENTER);
+        Prof.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Prof);
+        CadastrarProfessorTurma = new JTextField(100);
+        CadastrarProfessorTurma.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarProfessorTurma);
+        
+        JButton AddAlunoBtn;
+        AddAlunoBtn = new JButton("Adicionar Aluno");
+        AddAlunoBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        AddAlunoBtn.addActionListener(new AddAlunoTurma(this));
+        //painelFuncoes.add(AddAlunoBtn);
+        
+        painelBotoes.add(VoltarBtn);
+        painelBotoes.add(AddAlunoBtn);
+        
+        this.painelCadastrarTurma.add(painelBotoes, BorderLayout.SOUTH);
+        
+        this.painelCadastrarTurma.add(painelFuncoes, BorderLayout.CENTER);
+    }
+    
+    public void TelaAddAlunoTurma()
+    {
+        VisibilidadeTelaCadastrarTurma();
+        this.setSize(1280,720);
+        this.setVisible(true);
+        
+        this.painelAddAlunoTurma = new JPanel();
+        this.painelAddAlunoTurma.setLayout(new BorderLayout());
+        this.painelAddAlunoTurma.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+        
+        TelaAddAlunoTurmaAux();
+        
+        this.add(this.painelAddAlunoTurma);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.repaint();
+    }
+    
+    private void TelaAddAlunoTurmaAux()
+    {
+        JLabel Titulo = new JLabel("ADICIONAR ALUNO", SwingConstants.CENTER);
+        Titulo.setFont(new Font("Arial", Font.PLAIN, 120));
+        this.painelAddAlunoTurma.add(Titulo, BorderLayout.NORTH);
+        
+        Turmas.setVisible(true);
+        Turmas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.painelAddAlunoTurma.add(new JScrollPane(Turmas), BorderLayout.WEST);
+        
+        Alunos.setVisible(true);
+        Alunos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.painelAddAlunoTurma.add(new JScrollPane(Alunos), BorderLayout.CENTER);
+        
+        JPanel painelFuncoes = new JPanel();
+        painelFuncoes.setLayout(new GridLayout(0,2));
+        painelFuncoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+        
+        JButton AddAlunoBtn;
+        AddAlunoBtn = new JButton("Adicionar Aluno");
+        AddAlunoBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        AddAlunoBtn.addActionListener(new ConfirmaAddAlunoTurma(this));
+        painelFuncoes.add(AddAlunoBtn,BorderLayout.SOUTH);
+        
+        JButton VoltarBtn;
+        VoltarBtn = new JButton("Voltar");
+        VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        VoltarBtn.addActionListener(new Voltar(this,9));
+        
+        painelFuncoes.add(VoltarBtn);
+        painelFuncoes.add(AddAlunoBtn);
+        
+        this.painelAddAlunoTurma.add(painelFuncoes, BorderLayout.SOUTH);
     }
     
     public void TelaAdminRemoverTurma()
     {
+        VisibilidadeTelaAdmin();
+        this.setSize(1280,720);
+        this.setVisible(true);
         
+        this.painelRemoverTurma = new JPanel();
+        this.painelRemoverTurma.setLayout(new BorderLayout());
+        this.painelRemoverTurma.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+        
+        TelaAdminRemoverTurmaAux();
+        
+        this.add(this.painelRemoverTurma);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.repaint();
+    }
+    
+    public void TelaAdminRemoverTurmaAux()
+    {
+        Turmas.setVisible(true);
+        Turmas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.painelRemoverTurma.add(new JScrollPane(Turmas), BorderLayout.CENTER);
+        
+        JLabel Titulo = new JLabel("REMOVER TURMA", SwingConstants.CENTER);
+        Titulo.setFont(new Font("Arial", Font.PLAIN, 100));
+        this.painelRemoverTurma.add(Titulo, BorderLayout.NORTH);
+        
+        JButton RemoverBtn;
+        RemoverBtn = new JButton("Remover");
+        RemoverBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        RemoverBtn.addActionListener(new ConfirmaRemoveTurma(this));
+        this.painelRemoverTurma.add(RemoverBtn,BorderLayout.EAST);
+        
+        JButton VoltarBtn;
+        VoltarBtn = new JButton("Voltar");
+        VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        VoltarBtn.addActionListener(new Voltar(this,8));
+        this.painelRemoverTurma.add(VoltarBtn,BorderLayout.SOUTH);
     }
     
     public void TelaAdminEditarTurma()
     {
+        VisibilidadeTelaAdmin();
+        this.setSize(1280,720);
+        this.setVisible(true);
+        
+        this.painelEditarTurma = new JPanel();
+        this.painelEditarTurma.setLayout(new BorderLayout());
+        this.painelEditarTurma.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+        
+        TelaAdminEditarTurmaAux();
+        
+        this.add(this.painelEditarTurma);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.repaint();
+    }
+    
+    private void TelaAdminEditarTurmaAux()
+    {
+        JLabel Titulo = new JLabel("EDITAR TURMA", SwingConstants.CENTER);
+        Titulo.setFont(new Font("Arial", Font.PLAIN, 100));
+        this.painelEditarTurma.add(Titulo, BorderLayout.NORTH);
+        
+        Turmas.setVisible(true);
+        Turmas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.painelEditarTurma.add(new JScrollPane(Turmas), BorderLayout.WEST);
+        Turmas.addListSelectionListener(new InfoListaTurma(this, 0));
+        
+        JPanel painelFuncoes = new JPanel();
+        painelFuncoes.setLayout(new GridLayout(0,2));
+        painelFuncoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+        
+        JLabel Id = new JLabel("Id:", SwingConstants.CENTER);
+        Id.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Id);
+        CadastrarIdTurma = new JTextField(25);
+        CadastrarIdTurma.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarIdTurma);
+        
+        JLabel Serie = new JLabel("Serie:", SwingConstants.CENTER);
+        Serie.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Serie);
+        CadastrarSerieTurma = new JTextField(25);
+        CadastrarSerieTurma.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarSerieTurma);
+        
+        JLabel Turno = new JLabel("Turno:", SwingConstants.CENTER);
+        Turno.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Turno);
+        CadastrarTurnoTurma = new JTextField(25);
+        CadastrarTurnoTurma.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarTurnoTurma);
+        
+        JLabel Professor = new JLabel("Professor:", SwingConstants.CENTER);
+        Professor.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Professor);
+        CadastrarProfessorTurma = new JTextField(100);
+        CadastrarProfessorTurma.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarProfessorTurma);
+        
+        this.painelEditarTurma.add(painelFuncoes, BorderLayout.CENTER);
+        
+        JButton EditarBtn;
+        EditarBtn = new JButton("Editar");
+        EditarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        EditarBtn.addActionListener(new ConfirmaEditaTurma(this));
+        this.painelEditarTurma.add(EditarBtn,BorderLayout.EAST);
+        
+        JButton VoltarBtn;
+        VoltarBtn = new JButton("Voltar");
+        VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        VoltarBtn.addActionListener(new Voltar(this,10));
+        this.painelEditarTurma.add(VoltarBtn,BorderLayout.SOUTH);
         
     }
     
+    public void TelaProfessor()
+    {
+        painelPrincipal.setVisible(false);
+        this.setSize(1280,720);
+        this.setVisible(true);
+        
+        this.painelProfessor = new JPanel();
+        this.painelProfessor.setLayout(new BorderLayout());
+        this.painelProfessor.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+        
+        TelaProfessorAux();
+        
+        this.add(this.painelProfessor );
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.repaint();
+    }
     
+    private void TelaProfessorAux()
+    {
+        JButton SairBtn;
+        SairBtn = new JButton("Sair");
+        SairBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        SairBtn.addActionListener(new Sair(this,2));
+        this.painelProfessor.add(SairBtn,BorderLayout.SOUTH);
+        
+        JLabel professorTitulo = new JLabel("PROFESSOR", SwingConstants.CENTER);
+        professorTitulo.setFont(new Font("Arial", Font.PLAIN, 120));
+        this.painelProfessor.add(professorTitulo, BorderLayout.NORTH);
+        
+        JPanel painelFuncoes;
+        painelFuncoes = new JPanel();
+        painelFuncoes.setLayout(new GridLayout(0,3));
+        painelFuncoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+        
+        this.painelProfessor.add(painelFuncoes, BorderLayout.CENTER);
+    }
     
-    
-    
-    
-
     public static void main(String[] args) 
     {
         Tela tela = new Tela();
@@ -829,10 +1107,35 @@ public class Tela extends JFrame
         this.CadastrarEnderecoProfessor = CadastrarEnderecoProfessor;
     }
     
+    public void SetCadastrarIdTurma(JTextField CadastrarIdTurma)
+    {
+        this.CadastrarIdTurma = CadastrarIdTurma;
+    }
+    
+    public void SetCadastrarSerieTurma(JTextField CadastrarSerieTurma)
+    {
+        this.CadastrarSerieTurma = CadastrarSerieTurma;
+    }
+    
+    public void SetCadastrarTurnoTurma(JTextField CadastrarTurnoTurma)
+    {
+        this.CadastrarTurnoTurma = CadastrarTurnoTurma;
+    }
+    
+    public void SetCadastrarProfessorTurma(JTextField CadastrarProfessorTurma)
+    {
+        this.CadastrarProfessorTurma = CadastrarProfessorTurma;
+    }
+    
     //Getters
     public int GetLastId()
     {
         return this.LastId;
+    }
+    
+    public JList<Turma> GetTurmas() 
+    {
+        return Turmas;
     }
     
     public JList<Aluno> GetAlunos() 
@@ -925,10 +1228,35 @@ public class Tela extends JFrame
         return this.CadastrarEnderecoProfessor;
     }
     
+    public JTextField GetCadastrarIdTurma()
+    {
+        return this.CadastrarIdTurma;
+    }
+    
+    public JTextField GetCadastrarSerieTurma()
+    {
+        return this.CadastrarSerieTurma;
+    }
+    
+    public JTextField GetCadastrarTurnoTurma()
+    {
+        return this.CadastrarTurnoTurma;
+    }
+    
+    public JTextField GetCadastrarProfessorTurma()
+    {
+        return this.CadastrarProfessorTurma;
+    }
+    
     //Altera visibilidade
     public void VisibilidadeTelaAdmin()
     {
         this.painelAdmin.setVisible(false);
+    }
+    
+    public void VisibilidadeTelaProfessor()
+    {
+        this.painelProfessor.setVisible(false);
     }
     
     public void VisibilidadeTelaLogin()
@@ -980,5 +1308,10 @@ public class Tela extends JFrame
     public void VisibilidadeTelaEditarTurma()
     {
         this.painelEditarTurma.setVisible(false);
+    }
+    
+    public void VisibilidadeTelaAddAlunoTurma()
+    {
+        this.painelAddAlunoTurma.setVisible(false);
     }
 }

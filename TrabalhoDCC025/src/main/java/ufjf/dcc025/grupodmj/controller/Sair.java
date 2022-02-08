@@ -9,15 +9,28 @@ import ufjf.dcc025.grupodmj.obj.*;
 public class Sair implements ActionListener
 {
     private Tela tela;
+    private int TelaId;
     
-    public Sair(Tela tela)
+    public Sair(Tela tela, int TelaId)
     {
         this.tela = tela;
+        this.TelaId = TelaId;
     }
     
     public void actionPerformed(ActionEvent e)
     {
-        tela.VisibilidadeTelaAdmin();
-        tela.TelaPrincipal();
+        if(TelaId == 1)
+        {
+            tela.VisibilidadeTelaAdmin();
+            tela.TelaPrincipal();
+        }else
+            {
+                if(TelaId == 2)
+                {
+                   tela.VisibilidadeTelaProfessor();
+                    tela.TelaPrincipal(); 
+                }
+            }
+        
     }
 }

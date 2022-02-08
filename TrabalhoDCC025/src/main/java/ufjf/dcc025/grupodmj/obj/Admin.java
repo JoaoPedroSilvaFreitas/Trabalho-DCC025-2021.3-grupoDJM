@@ -15,6 +15,81 @@ public class Admin extends Usuario
         this.Senha = "Admin";
     }
     
+    public List<Aluno> GetAlunos()
+    {
+        return this.alunos;
+    }
+    
+    public List<Professor> GetProfessores()
+    {
+        return this.professores;
+    }
+    
+    public List<Turma> GetTurmas()
+    {
+        return this.turmas;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //DAQUI PRA BAIXO O CODIGO É IRRELEVANTE E PROVAVELMENTE SERÁ APAGADO NO FUTURO
+    
     //Aluno
     public void CadastrarAluno()
     {
@@ -268,14 +343,14 @@ public class Admin extends Usuario
     {
         Scanner sc = new Scanner(System.in);
         Professor professor = null;
-        int Serie;
+        String Serie;
         String ID, id;
-        Boolean Turno;
+        String Turno;
         Turma turma;
         
         ID = sc.nextLine();
-        Serie = sc.nextInt();
-        Turno = sc.nextBoolean();
+        Serie = sc.nextLine();
+        Turno = sc.nextLine();
         id = sc.nextLine();
         
         for(Professor prof : professores)
@@ -287,7 +362,7 @@ public class Admin extends Usuario
             }
         }
         
-        turma = new Turma(ID, Serie, professor, Turno);
+        turma = new Turma(ID, Serie,Turno,  professor);
         turmas.add(turma);
         professor.SetTurma(turma);
         
@@ -330,8 +405,8 @@ public class Admin extends Usuario
         Scanner sc = new Scanner(System.in);
         char opt = 'D';
         String id, Aux;
-        boolean turno;
-        int Serie;
+        String turno;
+        String Serie;
         
         id = sc.nextLine();
         
@@ -364,7 +439,7 @@ public class Admin extends Usuario
                 if(opt == '2')
                 {
                     System.out.println("Nova Série:");
-                    Serie = sc.nextInt();
+                    Serie = sc.nextLine();
                     turma.SetSerie(Serie);
                 }
                 
@@ -385,7 +460,7 @@ public class Admin extends Usuario
                 if(opt == '4')
                 {
                     System.out.println("Novo Turno:");
-                    turno = sc.nextBoolean();
+                    turno = sc.nextLine();
                     turma.SetTurno(turno);
                 }
                 

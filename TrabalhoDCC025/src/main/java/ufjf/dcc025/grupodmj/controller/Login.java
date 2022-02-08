@@ -25,7 +25,21 @@ public class Login implements ActionListener
             tela.TelaAdmin(admin);
         }
         
-        //Aqui teria um if para ler no "banco de dados" um senha e usuario válido
+        if(tela.GetUsuario().getText().equals("Professor") && tela.GetSenha().getText().equals("Professor"))
+        {
+            tela.TelaProfessor();
+        }
+        
+        
+        
+        /*
+        Aqui teria um if para ler no "banco de dados" um senha e usuario válido
+        
+        for(Professor professor : admin.GetProfessores())
+        {
+            
+        }
+        */
         
     }
 }
