@@ -24,6 +24,19 @@ public class ConfirmaCadastroTurma implements ActionListener
         Professor prof;
         Professor professor = null;
         
+        Turma turma;
+        Turma Turma = null;
+        
+        for(int i = 0; i < model.size(); i++)
+        {
+            turma = model.getElementAt(i);
+            
+            if(turma.GetId().equals(tela.GetCadastrarIdTurma().getText()))
+            {
+                Turma = turma;
+            }
+        }
+        
         for(int i = 0; i < professores.size(); i++)
         {
             prof = professores.getElementAt(i);
@@ -34,20 +47,27 @@ public class ConfirmaCadastroTurma implements ActionListener
             }
         }
         
-        if(professor == null)
+        
+        if(Turma != null)
         {
-            JOptionPane.showMessageDialog(tela, "ERRO: professor inexistente");
+            JOptionPane.showMessageDialog(tela, "ERRO: Id já registrado");
         }else
             {
-                model.addElement(new Turma(tela.GetCadastrarIdTurma().getText(), tela.GetCadastrarSerieTurma().getText(), tela.GetCadastrarTurnoTurma().getText(), professor));
+                if(professor == null)
+                {
+                    JOptionPane.showMessageDialog(tela, "ERRO: professor inexistente");
+                }else
+                    {
+                        model.addElement(new Turma(tela.GetCadastrarIdTurma().getText(), tela.GetCadastrarSerieTurma().getText(), tela.GetCadastrarTurnoTurma().getText(), professor));
 
-                tela.GetTurmas().setModel(model);
+                        tela.GetTurmas().setModel(model);
 
-                tela.repaint();
+                        tela.repaint();
 
-                JOptionPane.showMessageDialog(tela, "Cadastro Concluido");
+                        JOptionPane.showMessageDialog(tela, "Cadastro Concluido");
+                    }
             }
         
-        
+
     }
 }

@@ -19,14 +19,42 @@ public class ConfirmaCadastroProfessor implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         DefaultListModel<Professor> model = (DefaultListModel<Professor>) tela.GetProfessores().getModel();
+        DefaultListModel<Aluno> alunos = (DefaultListModel<Aluno>) tela.GetAlunos().getModel();
+        Professor prof;
+        Professor professor = null;
+        Aluno aluno;
+        Aluno Aluno = null;
         
-        model.addElement(new Professor(tela.GetCadastrarIdProfessor().getText(), tela.GetCadastrarSenhaProfessor().getText(), tela.GetCadastrarNomeProfessor().getText(), tela.GetCadastrarDataProfessor().getText(), tela.GetCadastrarFiliacaoProfessor().getText(), tela.GetCadastrarTelefoneProfessor().getText(), tela.GetCadastrarEnderecoProfessor().getText()));
+        for(int i = 0; i < model.size(); i++)
+        {
+            prof = model.getElementAt(i);
+            if(prof.GetId().equals(tela.GetCadastrarIdProfessor().getText()))
+            {
+                professor = prof;
+            }
+        }
         
-        tela.GetProfessores().setModel(model);
+        for(int i = 0; i < alunos.size(); i++)
+        {
+            aluno = alunos.getElementAt(i);
+            if(aluno.GetId().equals(tela.GetCadastrarIdProfessor().getText()))
+            {
+                Aluno = aluno;
+            }
+        }
         
-        tela.repaint();
-        
-        JOptionPane.showMessageDialog(tela, "Cadastro Concluido");
-        //Adicionar aqui um Tratamento de excessão caso ocorra um erro de cadastro e exibir mensagem na tela
+        if(professor != null || Aluno != null)
+        {
+            JOptionPane.showMessageDialog(tela, "ERRO: id já registrado(Atenção:Alunos e professores não podem compartilhar Id)");
+        }else
+            {
+                model.addElement(new Professor(tela.GetCadastrarIdProfessor().getText(), tela.GetCadastrarSenhaProfessor().getText(), tela.GetCadastrarNomeProfessor().getText(), tela.GetCadastrarDataProfessor().getText(), tela.GetCadastrarFiliacaoProfessor().getText(), tela.GetCadastrarTelefoneProfessor().getText(), tela.GetCadastrarEnderecoProfessor().getText()));
+
+                tela.GetProfessores().setModel(model);
+
+                tela.repaint();
+
+                JOptionPane.showMessageDialog(tela, "Cadastro Concluido");
+            }
     }
 }

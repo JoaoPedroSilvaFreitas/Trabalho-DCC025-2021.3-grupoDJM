@@ -29,6 +29,8 @@ public class ConfirmaEditaTurma implements ActionListener
                 DefaultListModel<Professor> professores = (DefaultListModel<Professor>) tela.GetProfessores().getModel();
                 Professor prof;
                 Professor professor = null;
+                Turma turma;
+                Turma Turma = null;
 
                 for(int i = 0; i < professores.size(); i++)
                 {
@@ -40,21 +42,38 @@ public class ConfirmaEditaTurma implements ActionListener
                     }
                 }
                 
-                if(professor == null)
+                for(int i = 0; i < model.size(); i++)
                 {
-                    JOptionPane.showMessageDialog(tela, "ERRO: professor inexistente");
+                    turma = model.getElementAt(i);
+                    
+                    if(turma.GetId().equals(tela.GetCadastrarIdTurma().getText()) && !turma.GetId().equals(model.getElementAt(id).GetId()))
+                    {
+                        Turma = turma;
+                    }
+                }
+                
+                if(Turma != null)
+                {
+                    JOptionPane.showMessageDialog(tela, "ERRO: Id já registrado");
                 }else
                     {
-                        model.getElementAt(id).SetId(tela.GetCadastrarIdTurma().getText());
-                        model.getElementAt(id).SetSerie(tela.GetCadastrarSerieTurma().getText());
-                        model.getElementAt(id).SetTurno(tela.GetCadastrarTurnoTurma().getText());
-                        model.getElementAt(id).SetProfessor(professor);
+                        if(professor == null)
+                        {
+                            JOptionPane.showMessageDialog(tela, "ERRO: professor inexistente");
+                        }else
+                            {
+                                model.getElementAt(id).SetId(tela.GetCadastrarIdTurma().getText());
+                                model.getElementAt(id).SetSerie(tela.GetCadastrarSerieTurma().getText());
+                                model.getElementAt(id).SetTurno(tela.GetCadastrarTurnoTurma().getText());
+                                model.getElementAt(id).SetProfessor(professor);
 
-                        tela.GetTurmas().setModel(model);
+                                tela.GetTurmas().setModel(model);
 
-                        tela.repaint();
-                        JOptionPane.showMessageDialog(tela, "Edição conluida");
+                                tela.repaint();
+                                JOptionPane.showMessageDialog(tela, "Edição conluida");
+                            }
                     }
+                
             }
     }
 }
