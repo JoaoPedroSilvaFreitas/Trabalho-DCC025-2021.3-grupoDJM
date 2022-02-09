@@ -10,6 +10,7 @@ public class Tela extends JFrame
     private JPanel painelPrincipal;
     private JPanel painelAdmin;
     private JPanel painelProfessor;
+    private JPanel painelAluno;
     private JPanel painelLogin;
     private JPanel painelAddAlunoTurma;
     
@@ -978,7 +979,7 @@ public class Tela extends JFrame
         
     }
     
-    public void TelaProfessor()
+    public void TelaProfessor(Professor professor)
     {
         painelPrincipal.setVisible(false);
         this.setSize(1280,720);
@@ -988,14 +989,14 @@ public class Tela extends JFrame
         this.painelProfessor.setLayout(new BorderLayout());
         this.painelProfessor.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
         
-        TelaProfessorAux();
+        TelaProfessorAux(professor);
         
         this.add(this.painelProfessor );
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.repaint();
     }
     
-    private void TelaProfessorAux()
+    private void TelaProfessorAux(Professor professor)
     {
         JButton SairBtn;
         SairBtn = new JButton("Sair");
@@ -1003,7 +1004,7 @@ public class Tela extends JFrame
         SairBtn.addActionListener(new Sair(this,2));
         this.painelProfessor.add(SairBtn,BorderLayout.SOUTH);
         
-        JLabel professorTitulo = new JLabel("PROFESSOR", SwingConstants.CENTER);
+        JLabel professorTitulo = new JLabel(professor.GetNome(), SwingConstants.CENTER);
         professorTitulo.setFont(new Font("Arial", Font.PLAIN, 120));
         this.painelProfessor.add(professorTitulo, BorderLayout.NORTH);
         
@@ -1013,6 +1014,43 @@ public class Tela extends JFrame
         painelFuncoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
         
         this.painelProfessor.add(painelFuncoes, BorderLayout.CENTER);
+    }
+    
+    public void TelaAluno(Aluno aluno)
+    {
+        painelPrincipal.setVisible(false);
+        this.setSize(1280,720);
+        this.setVisible(true);
+        
+        this.painelAluno = new JPanel();
+        this.painelAluno.setLayout(new BorderLayout());
+        this.painelAluno.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+        
+        TelaAlunoAux(aluno);
+        
+        this.add(this.painelAluno);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.repaint();
+    }
+    
+    private void TelaAlunoAux(Aluno aluno)
+    {
+        JButton SairBtn;
+        SairBtn = new JButton("Sair");
+        SairBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        SairBtn.addActionListener(new Sair(this,3));
+        this.painelAluno.add(SairBtn,BorderLayout.SOUTH);
+        
+        JLabel alunoTitulo = new JLabel(aluno.GetNome(), SwingConstants.CENTER);
+        alunoTitulo.setFont(new Font("Arial", Font.PLAIN, 120));
+        this.painelAluno.add(alunoTitulo, BorderLayout.NORTH);
+        
+        JPanel painelFuncoes;
+        painelFuncoes = new JPanel();
+        painelFuncoes.setLayout(new GridLayout(0,3));
+        painelFuncoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+        
+        this.painelAluno.add(painelFuncoes, BorderLayout.CENTER);
     }
     
     public static void main(String[] args) 
@@ -1258,6 +1296,11 @@ public class Tela extends JFrame
     public void VisibilidadeTelaProfessor()
     {
         this.painelProfessor.setVisible(false);
+    }
+    
+    public void VisibilidadeTelaAluno()
+    {
+        this.painelAluno.setVisible(false);
     }
     
     public void VisibilidadeTelaLogin()

@@ -29,7 +29,14 @@ public class Sair implements ActionListener
                 {
                    tela.VisibilidadeTelaProfessor();
                     tela.TelaPrincipal(); 
-                }
+                }else
+                    {
+                        if(TelaId == 3)
+                        {
+                           tela.VisibilidadeTelaAluno();
+                            tela.TelaPrincipal(); 
+                        }
+                    }
             }
         
     }
