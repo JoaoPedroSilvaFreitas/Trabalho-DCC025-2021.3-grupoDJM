@@ -63,6 +63,7 @@ public class Tela extends JFrame
         Professores = new JList<>(modelProfessor);
         DefaultListModel<Turma> modelTurma = new DefaultListModel<>();
         Turmas = new JList<>(modelTurma);
+        this.addWindowListener(new AtualizaDados(this));
         
     }
     
