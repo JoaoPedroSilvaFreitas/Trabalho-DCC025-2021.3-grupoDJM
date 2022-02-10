@@ -78,7 +78,21 @@ public class Voltar implements ActionListener
                                                                                 {
                                                                                     tela.VisibilidadeTelaEditarTurma();
                                                                                     tela.TelaAdmin(Login.admin);
-                                                                                }
+                                                                                }else
+                                                                                    {
+                                                                                        if(TelaId == 11)
+                                                                                        {
+                                                                                            tela.VisibilidadeTelaAlteraSenha();
+                                                                                            tela.TelaProfessor(Login.professor);
+                                                                                        }else
+                                                                                            {
+                                                                                                if(TelaId == 12)
+                                                                                                {
+                                                                                                    tela.VisibilidadeTelaAlteraSenha();
+                                                                                                    tela.TelaAluno(Login.aluno);
+                                                                                                }
+                                                                                            }
+                                                                                    }
                                                                             }
                                                                     }
                                                             }

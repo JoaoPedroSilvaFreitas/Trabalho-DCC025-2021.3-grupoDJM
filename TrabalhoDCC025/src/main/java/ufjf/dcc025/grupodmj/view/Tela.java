@@ -45,6 +45,8 @@ public class Tela extends JFrame
     private JTextField CadastrarTurnoTurma;
     private JTextField CadastrarProfessorTurma;
     
+    private JPanel painelAlteraSenha;
+    private JTextField EditaSenha;
     
     private JTextField usuario;
     private JPasswordField senha;
@@ -998,6 +1000,17 @@ public class Tela extends JFrame
     
     private void TelaProfessorAux(Professor professor)
     {
+        JLabel preencheEspaco0 = new JLabel();
+        JLabel preencheEspaco1 = new JLabel();
+        JLabel preencheEspaco2 = new JLabel();
+        JLabel preencheEspaco3 = new JLabel();
+        JLabel preencheEspaco4 = new JLabel();
+        JLabel preencheEspaco5 = new JLabel();
+        JLabel preencheEspaco6 = new JLabel();
+        JLabel preencheEspaco7 = new JLabel();
+        JLabel preencheEspaco8 = new JLabel();
+        
+        
         JButton SairBtn;
         SairBtn = new JButton("Sair");
         SairBtn.setFont(new Font("Arial", Font.PLAIN, 26));
@@ -1012,6 +1025,55 @@ public class Tela extends JFrame
         painelFuncoes = new JPanel();
         painelFuncoes.setLayout(new GridLayout(0,3));
         painelFuncoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+        
+        painelFuncoes.add(preencheEspaco0);
+        painelFuncoes.add(preencheEspaco1);
+        painelFuncoes.add(preencheEspaco2);
+        
+        //Botões Aluno
+        JButton CadastrarDisciplinaBtn;
+        CadastrarDisciplinaBtn = new JButton("Cadastrar Disciplina");
+        CadastrarDisciplinaBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        //CadastrarDisciplinaBtn.addActionListener(new CadastrarDisciplina(this));
+        painelFuncoes.add(CadastrarDisciplinaBtn);
+        
+        JButton RemoverDisciplinaBtn;
+        RemoverDisciplinaBtn = new JButton("Remover Disciplina");
+        RemoverDisciplinaBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        //RemoverDisciplinaBtn.addActionListener(new RemoverDisciplina(this));
+        painelFuncoes.add(RemoverDisciplinaBtn);
+        
+        JButton EditarDisciplinaBtn;
+        EditarDisciplinaBtn = new JButton("Editar Disciplina");
+        EditarDisciplinaBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        //EditarDisciplinaBtn.addActionListener(new EditarDisciplina(this));
+        painelFuncoes.add(EditarDisciplinaBtn);
+        
+        painelFuncoes.add(preencheEspaco3);
+        painelFuncoes.add(preencheEspaco4);
+        painelFuncoes.add(preencheEspaco5);
+        
+        JButton AlterarSenhaBtn;
+        AlterarSenhaBtn = new JButton("Alterar Senha");
+        AlterarSenhaBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        AlterarSenhaBtn.addActionListener(new AlterarSenha(this, professor));
+        painelFuncoes.add(AlterarSenhaBtn);
+        
+        JButton MinhaTurmaBtn;
+        MinhaTurmaBtn = new JButton("Minha Turma");
+        MinhaTurmaBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        //MinhaTurmaBtn.addActionListener(new MinhaTurma(this));
+        painelFuncoes.add(MinhaTurmaBtn);
+        
+        JButton NotasBtn;
+        NotasBtn = new JButton("Notas");
+        NotasBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        //NotasBtn.addActionListener(new Notas(this));
+        painelFuncoes.add(NotasBtn);
+        
+        painelFuncoes.add(preencheEspaco6);
+        painelFuncoes.add(preencheEspaco7);
+        painelFuncoes.add(preencheEspaco8);
         
         this.painelProfessor.add(painelFuncoes, BorderLayout.CENTER);
     }
@@ -1035,6 +1097,11 @@ public class Tela extends JFrame
     
     private void TelaAlunoAux(Aluno aluno)
     {
+        JLabel preencheEspaco0 = new JLabel();
+        JLabel preencheEspaco1 = new JLabel();
+        JLabel preencheEspaco2 = new JLabel();
+        JLabel preencheEspaco3 = new JLabel();
+        
         JButton SairBtn;
         SairBtn = new JButton("Sair");
         SairBtn.setFont(new Font("Arial", Font.PLAIN, 26));
@@ -1047,10 +1114,152 @@ public class Tela extends JFrame
         
         JPanel painelFuncoes;
         painelFuncoes = new JPanel();
+        painelFuncoes.setLayout(new GridLayout(0,2));
+        painelFuncoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+        
+        painelFuncoes.add(preencheEspaco0);
+        painelFuncoes.add(preencheEspaco1);
+        
+        JButton AlterarSenhaBtn;
+        AlterarSenhaBtn = new JButton("Alterar Senha");
+        AlterarSenhaBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        AlterarSenhaBtn.addActionListener(new AlterarSenha(this, aluno));
+        painelFuncoes.add(AlterarSenhaBtn);
+        
+        JButton MinhasNotasBtn;
+        MinhasNotasBtn = new JButton("Minhas Notas");
+        MinhasNotasBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        //MinhasNotasBtn.addActionListener(new MinhasNotas(this));
+        painelFuncoes.add(MinhasNotasBtn);
+        
+        painelFuncoes.add(preencheEspaco2);
+        painelFuncoes.add(preencheEspaco3);
+        
+        this.painelAluno.add(painelFuncoes, BorderLayout.CENTER);
+    }
+    
+    public void TelaAlteraSenha(Professor professor)
+    {
+        painelProfessor.setVisible(false);
+        this.setSize(1280,720);
+        this.setVisible(true);
+        
+        this.painelAlteraSenha = new JPanel();
+        this.painelAlteraSenha.setLayout(new BorderLayout());
+        this.painelAlteraSenha.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+        
+        TelaAlteraSenhaAux(professor);
+        
+        this.add(this.painelAlteraSenha);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.repaint();
+    }
+    
+    private void TelaAlteraSenhaAux(Professor professor)
+    {
+        JLabel preencheEspaco0 = new JLabel();
+        JLabel preencheEspaco1 = new JLabel();
+        JLabel preencheEspaco2 = new JLabel();
+        JLabel preencheEspaco3 = new JLabel();
+        
+        JLabel Titulo = new JLabel("ALTERA SENHA", SwingConstants.CENTER);
+        Titulo.setFont(new Font("Arial", Font.PLAIN, 120));
+        this.painelAlteraSenha.add(Titulo, BorderLayout.NORTH);
+        
+        JPanel painelFuncoes;
+        painelFuncoes = new JPanel();
         painelFuncoes.setLayout(new GridLayout(0,3));
         painelFuncoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
         
-        this.painelAluno.add(painelFuncoes, BorderLayout.CENTER);
+        painelFuncoes.add(preencheEspaco0);
+        painelFuncoes.add(preencheEspaco1);
+        painelFuncoes.add(preencheEspaco2);
+        
+        JLabel senha = new JLabel("SENHA", SwingConstants.CENTER);
+        senha.setFont(new Font("Arial", Font.PLAIN, 80));
+        painelFuncoes.add(senha);
+        
+        EditaSenha = new JTextField(20);
+        EditaSenha.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(EditaSenha);
+        
+        JButton ConfirmaBtn;
+        ConfirmaBtn = new JButton("Editar");
+        ConfirmaBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        ConfirmaBtn.addActionListener(new ConfirmaEditaSenha(this,professor));
+        painelFuncoes.add(ConfirmaBtn);
+        
+        painelFuncoes.add(preencheEspaco3);
+        
+        this.painelAlteraSenha.add(painelFuncoes,BorderLayout.CENTER);
+        
+        JButton VoltarBtn;
+        VoltarBtn = new JButton("Voltar");
+        VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        VoltarBtn.addActionListener(new Voltar(this,11));
+        this.painelAlteraSenha.add(VoltarBtn,BorderLayout.SOUTH);
+    }
+    
+    public void TelaAlteraSenha(Aluno aluno)
+    {
+        painelAluno.setVisible(false);
+        this.setSize(1280,720);
+        this.setVisible(true);
+        
+        this.painelAlteraSenha = new JPanel();
+        this.painelAlteraSenha.setLayout(new BorderLayout());
+        this.painelAlteraSenha.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+        
+        TelaAlteraSenhaAux(aluno);
+        
+        this.add(this.painelAlteraSenha);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.repaint();
+    }
+    
+    private void TelaAlteraSenhaAux(Aluno aluno)
+    {
+        JLabel preencheEspaco0 = new JLabel();
+        JLabel preencheEspaco1 = new JLabel();
+        JLabel preencheEspaco2 = new JLabel();
+        JLabel preencheEspaco3 = new JLabel();
+        
+       JLabel Titulo = new JLabel("ALTERA SENHA", SwingConstants.CENTER);
+        Titulo.setFont(new Font("Arial", Font.PLAIN, 120));
+        this.painelAlteraSenha.add(Titulo, BorderLayout.NORTH);
+        
+        JPanel painelFuncoes;
+        painelFuncoes = new JPanel();
+        painelFuncoes.setLayout(new GridLayout(0,3));
+        painelFuncoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+        
+        painelFuncoes.add(preencheEspaco0);
+        painelFuncoes.add(preencheEspaco1);
+        painelFuncoes.add(preencheEspaco2);
+        
+        JLabel senha = new JLabel("SENHA", SwingConstants.CENTER);
+        senha.setFont(new Font("Arial", Font.PLAIN, 80));
+        painelFuncoes.add(senha);
+        
+        EditaSenha = new JTextField(20);
+        EditaSenha.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(EditaSenha);
+        
+        JButton ConfirmaBtn;
+        ConfirmaBtn = new JButton("Editar");
+        ConfirmaBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        ConfirmaBtn.addActionListener(new ConfirmaEditaSenha(this,aluno));
+        painelFuncoes.add(ConfirmaBtn);
+        
+        painelFuncoes.add(preencheEspaco3);
+        
+        this.painelAlteraSenha.add(painelFuncoes,BorderLayout.CENTER);
+        
+        JButton VoltarBtn;
+        VoltarBtn = new JButton("Voltar");
+        VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        VoltarBtn.addActionListener(new Voltar(this,12));
+        this.painelAlteraSenha.add(VoltarBtn,BorderLayout.SOUTH);
     }
     
     public static void main(String[] args) 
@@ -1287,6 +1496,11 @@ public class Tela extends JFrame
         return this.CadastrarProfessorTurma;
     }
     
+    public JTextField GetEditaSenha()
+    {
+        return this.EditaSenha;
+    }
+    
     //Altera visibilidade
     public void VisibilidadeTelaAdmin()
     {
@@ -1358,4 +1572,10 @@ public class Tela extends JFrame
     {
         this.painelAddAlunoTurma.setVisible(false);
     }
+    
+    public void VisibilidadeTelaAlteraSenha()
+    {
+        this.painelAlteraSenha.setVisible(false);
+    }
+    
 }
