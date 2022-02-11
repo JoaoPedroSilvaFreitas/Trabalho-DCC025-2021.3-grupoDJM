@@ -45,6 +45,17 @@ public class Turma
         return null;
     }
     
+    
+    public List<Aluno> GetAlunos()
+    {
+        return this.alunos;
+    }
+    
+    public List<Disciplina> GetDisciplinas()
+    {
+        return this.disciplinas;
+    }
+    
     //Edita Professor da turma
     public void SetProfessor(Professor professor)
     {

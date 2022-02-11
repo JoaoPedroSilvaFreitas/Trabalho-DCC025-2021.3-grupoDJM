@@ -90,7 +90,35 @@ public class Voltar implements ActionListener
                                                                                                 {
                                                                                                     tela.VisibilidadeTelaAlteraSenha();
                                                                                                     tela.TelaAluno(Login.aluno);
-                                                                                                }
+                                                                                                }else
+                                                                                                    {
+                                                                                                        if(TelaId == 13)
+                                                                                                        {
+                                                                                                            tela.VisibilidadeTelaMinhaTurma();
+                                                                                                            tela.TelaProfessor(Login.professor);
+                                                                                                        }else
+                                                                                                            {
+                                                                                                                if(TelaId == 14)
+                                                                                                                {
+                                                                                                                    tela.VisibilidadeTelaCadastrarDisciplina();
+                                                                                                                    tela.TelaProfessor(Login.professor);
+                                                                                                                }else
+                                                                                                                    {
+                                                                                                                        if(TelaId == 15)
+                                                                                                                        {
+                                                                                                                            tela.VisibilidadeTelaRemoverDisciplina();
+                                                                                                                            tela.TelaProfessor(Login.professor);
+                                                                                                                        }else
+                                                                                                                            {
+                                                                                                                                if(TelaId == 16)
+                                                                                                                                {
+                                                                                                                                    tela.VisibilidadeTelaEditarDisciplina();
+                                                                                                                                    tela.TelaProfessor(Login.professor);
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                    }
+                                                                                                            }
+                                                                                                    }
                                                                                             }
                                                                                     }
                                                                             }

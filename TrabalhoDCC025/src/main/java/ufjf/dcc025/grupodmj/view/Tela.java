@@ -45,6 +45,14 @@ public class Tela extends JFrame
     private JTextField CadastrarTurnoTurma;
     private JTextField CadastrarProfessorTurma;
     
+    private JPanel painelCadastrarDisciplina;
+    private JPanel painelRemoverDisciplina;
+    private JPanel painelEditarDisciplina;
+    private JTextField CadastrarIdDisciplina;
+    private JTextField CadastrarNomeDisciplina;
+    
+    private JPanel painelMinhaTurma;
+    
     private JPanel painelAlteraSenha;
     private JTextField EditaSenha;
     
@@ -54,6 +62,8 @@ public class Tela extends JFrame
     private JList<Aluno> Alunos;
     private JList<Professor> Professores;
     private JList<Turma> Turmas;
+    private JList<Aluno> alunosTurma;
+    private JList<Disciplina> disciplinas;
     
     private int LastId;
     
@@ -68,6 +78,30 @@ public class Tela extends JFrame
         Turmas = new JList<>(modelTurma);
         this.addWindowListener(new AtualizaDados(this));
         
+    }
+    
+    //OBS: ESSA FUNÇÃO É UMA "GAMBIARRA" PORQUE POR ALGUM MOTIVO O GSON SALVA TODOS ATRIBUTOS DO PROFESSOR E DO ALUNO, MENOS A TURMA
+    private void AtualizaDadosProfessor()
+    {
+        
+        DefaultListModel<Turma> modelTurma = (DefaultListModel<Turma>) GetTurmas().getModel();
+        DefaultListModel<Professor> modelProfessor = (DefaultListModel<Professor>) GetProfessores().getModel();
+        Professor professor;
+        Turma turma;
+        
+        for(int i = 0; i < modelProfessor.size(); i++)
+        {
+            professor = modelProfessor.getElementAt(i);
+            for(int j = 0; j < modelTurma.size(); j++)
+            {
+                turma = modelTurma.getElementAt(j);
+                
+                if(professor.GetId().equals(turma.GetProfessor().GetId()))
+                {
+                    professor.SetTurma(turma);
+                }
+            }
+        }
     }
     
     public void TelaPrincipal()
@@ -107,7 +141,7 @@ public class Tela extends JFrame
         this.painelLogin.add(preencheEspaco0);
         this.painelLogin.add(preencheEspaco1);
         
-        JLabel Usuario = new JLabel("Usuario:", SwingConstants.CENTER);
+        JLabel Usuario = new JLabel("Usuario(id):", SwingConstants.CENTER);
         Usuario.setFont(new Font("Arial", Font.PLAIN, 80));
         usuario = new JTextField(100);
         usuario.setFont(new Font("Arial", Font.PLAIN, 95));
@@ -260,8 +294,7 @@ public class Tela extends JFrame
         this.painelAdmin.add(painelFuncoes, BorderLayout.CENTER);
     }
     
-    
-    //Admin -> ALuno
+    //ADMIN -> ALUNO
     public void TelaAdminCadastrarAluno()
     {
         VisibilidadeTelaAdmin();
@@ -512,6 +545,7 @@ public class Tela extends JFrame
         this.repaint();
     }
     
+    //ADMIN -> PROFESSOR
     private void TelaAdminCadastrarProfessorAux()
     {
         JLabel Titulo = new JLabel("CADASTRAR PROFESSOR", SwingConstants.CENTER);
@@ -726,6 +760,7 @@ public class Tela extends JFrame
         this.painelEditarProfessor.add(VoltarBtn,BorderLayout.SOUTH);
     }
     
+    //ADMIN -> TURMA
     public void TelaAdminCadastrarTurma()
     {
         VisibilidadeTelaAdmin();
@@ -981,6 +1016,39 @@ public class Tela extends JFrame
         
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //PROFESSOR
     public void TelaProfessor(Professor professor)
     {
         painelPrincipal.setVisible(false);
@@ -991,6 +1059,7 @@ public class Tela extends JFrame
         this.painelProfessor.setLayout(new BorderLayout());
         this.painelProfessor.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
         
+        AtualizaDadosProfessor();
         TelaProfessorAux(professor);
         
         this.add(this.painelProfessor );
@@ -1034,19 +1103,19 @@ public class Tela extends JFrame
         JButton CadastrarDisciplinaBtn;
         CadastrarDisciplinaBtn = new JButton("Cadastrar Disciplina");
         CadastrarDisciplinaBtn.setFont(new Font("Arial", Font.PLAIN, 26));
-        //CadastrarDisciplinaBtn.addActionListener(new CadastrarDisciplina(this));
+        CadastrarDisciplinaBtn.addActionListener(new CadastrarDisciplina(this, professor));
         painelFuncoes.add(CadastrarDisciplinaBtn);
         
         JButton RemoverDisciplinaBtn;
         RemoverDisciplinaBtn = new JButton("Remover Disciplina");
         RemoverDisciplinaBtn.setFont(new Font("Arial", Font.PLAIN, 26));
-        //RemoverDisciplinaBtn.addActionListener(new RemoverDisciplina(this));
+        RemoverDisciplinaBtn.addActionListener(new RemoverDisciplina(this, professor));
         painelFuncoes.add(RemoverDisciplinaBtn);
         
         JButton EditarDisciplinaBtn;
         EditarDisciplinaBtn = new JButton("Editar Disciplina");
         EditarDisciplinaBtn.setFont(new Font("Arial", Font.PLAIN, 26));
-        //EditarDisciplinaBtn.addActionListener(new EditarDisciplina(this));
+        EditarDisciplinaBtn.addActionListener(new EditarDisciplina(this, professor));
         painelFuncoes.add(EditarDisciplinaBtn);
         
         painelFuncoes.add(preencheEspaco3);
@@ -1062,7 +1131,7 @@ public class Tela extends JFrame
         JButton MinhaTurmaBtn;
         MinhaTurmaBtn = new JButton("Minha Turma");
         MinhaTurmaBtn.setFont(new Font("Arial", Font.PLAIN, 26));
-        //MinhaTurmaBtn.addActionListener(new MinhaTurma(this));
+        MinhaTurmaBtn.addActionListener(new MinhaTurma(this, professor));
         painelFuncoes.add(MinhaTurmaBtn);
         
         JButton NotasBtn;
@@ -1075,67 +1144,233 @@ public class Tela extends JFrame
         painelFuncoes.add(preencheEspaco7);
         painelFuncoes.add(preencheEspaco8);
         
+        if(professor.GetTurma() == null)
+        {
+            CadastrarDisciplinaBtn.setEnabled(false);
+            RemoverDisciplinaBtn.setEnabled(false);
+            EditarDisciplinaBtn.setEnabled(false);
+            MinhaTurmaBtn.setEnabled(false);
+            NotasBtn.setEnabled(false);
+        }
+        
         this.painelProfessor.add(painelFuncoes, BorderLayout.CENTER);
     }
     
-    public void TelaAluno(Aluno aluno)
+    public void TelaProfessorCadastrarDisciplina(Professor professor)
     {
-        painelPrincipal.setVisible(false);
+        VisibilidadeTelaProfessor();
         this.setSize(1280,720);
         this.setVisible(true);
         
-        this.painelAluno = new JPanel();
-        this.painelAluno.setLayout(new BorderLayout());
-        this.painelAluno.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+        this.painelCadastrarDisciplina = new JPanel();
+        this.painelCadastrarDisciplina.setLayout(new BorderLayout());
+        this.painelCadastrarDisciplina.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
         
-        TelaAlunoAux(aluno);
+        TelaProfessorCadastrarDisciplinaAux(professor);
         
-        this.add(this.painelAluno);
+        this.add(this.painelCadastrarDisciplina);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.repaint();
     }
     
-    private void TelaAlunoAux(Aluno aluno)
+    private void TelaProfessorCadastrarDisciplinaAux(Professor professor)
     {
-        JLabel preencheEspaco0 = new JLabel();
-        JLabel preencheEspaco1 = new JLabel();
-        JLabel preencheEspaco2 = new JLabel();
-        JLabel preencheEspaco3 = new JLabel();
+        JLabel Titulo = new JLabel("CADASTRAR DISCIPLINA", SwingConstants.CENTER);
+        Titulo.setFont(new Font("Arial", Font.PLAIN, 100));
+        this.painelCadastrarDisciplina.add(Titulo, BorderLayout.NORTH);
         
-        JButton SairBtn;
-        SairBtn = new JButton("Sair");
-        SairBtn.setFont(new Font("Arial", Font.PLAIN, 26));
-        SairBtn.addActionListener(new Sair(this,3));
-        this.painelAluno.add(SairBtn,BorderLayout.SOUTH);
+        JButton VoltarBtn;
+        VoltarBtn = new JButton("Voltar");
+        VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        VoltarBtn.addActionListener(new Voltar(this,14));
+        this.painelCadastrarDisciplina.add(VoltarBtn,BorderLayout.SOUTH);
         
-        JLabel alunoTitulo = new JLabel(aluno.GetNome(), SwingConstants.CENTER);
-        alunoTitulo.setFont(new Font("Arial", Font.PLAIN, 120));
-        this.painelAluno.add(alunoTitulo, BorderLayout.NORTH);
+        JButton CadastrarBtn;
+        CadastrarBtn = new JButton("Cadastrar");
+        CadastrarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        CadastrarBtn.addActionListener(new ConfirmaCadastroDisciplina(this, professor));
+        this.painelCadastrarDisciplina.add(CadastrarBtn,BorderLayout.EAST);
         
         JPanel painelFuncoes;
         painelFuncoes = new JPanel();
         painelFuncoes.setLayout(new GridLayout(0,2));
         painelFuncoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
         
-        painelFuncoes.add(preencheEspaco0);
-        painelFuncoes.add(preencheEspaco1);
+        //Adicionar aqui JTextField
+        JLabel Id = new JLabel("Id:", SwingConstants.CENTER);
+        Id.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Id);
+        CadastrarIdDisciplina = new JTextField(25);
+        CadastrarIdDisciplina.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarIdDisciplina);
         
-        JButton AlterarSenhaBtn;
-        AlterarSenhaBtn = new JButton("Alterar Senha");
-        AlterarSenhaBtn.setFont(new Font("Arial", Font.PLAIN, 26));
-        AlterarSenhaBtn.addActionListener(new AlterarSenha(this, aluno));
-        painelFuncoes.add(AlterarSenhaBtn);
+        JLabel Nome = new JLabel("Nome:", SwingConstants.CENTER);
+        Nome.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Nome);
+        CadastrarNomeDisciplina = new JTextField(50);
+        CadastrarNomeDisciplina.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarNomeDisciplina);
         
-        JButton MinhasNotasBtn;
-        MinhasNotasBtn = new JButton("Minhas Notas");
-        MinhasNotasBtn.setFont(new Font("Arial", Font.PLAIN, 26));
-        //MinhasNotasBtn.addActionListener(new MinhasNotas(this));
-        painelFuncoes.add(MinhasNotasBtn);
+        this.painelCadastrarDisciplina.add(painelFuncoes, BorderLayout.CENTER);
+    }
+    
+    public void TelaProfessorRemoverDisciplina(Professor professor)
+    {
+        VisibilidadeTelaProfessor();
+        this.setSize(1280,720);
+        this.setVisible(true);
         
-        painelFuncoes.add(preencheEspaco2);
-        painelFuncoes.add(preencheEspaco3);
+        this.painelRemoverDisciplina = new JPanel();
+        this.painelRemoverDisciplina.setLayout(new BorderLayout());
+        this.painelRemoverDisciplina.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
         
-        this.painelAluno.add(painelFuncoes, BorderLayout.CENTER);
+        TelaProfessorRemoverDisciplinaAux(professor);
+        
+        this.add(this.painelRemoverDisciplina);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.repaint();
+    }
+    
+    private void TelaProfessorRemoverDisciplinaAux(Professor professor)
+    {
+        disciplinas = new JList(professor.GetTurma().GetDisciplinas().toArray());
+        disciplinas.setVisible(true);
+        disciplinas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.painelRemoverDisciplina.add(new JScrollPane(disciplinas), BorderLayout.CENTER);
+        
+        
+        JLabel Titulo = new JLabel("REMOVER DISCIPLINA", SwingConstants.CENTER);
+        Titulo.setFont(new Font("Arial", Font.PLAIN, 110));
+        this.painelRemoverDisciplina.add(Titulo, BorderLayout.NORTH);
+        
+        JButton VoltarBtn;
+        VoltarBtn = new JButton("Voltar");
+        VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        VoltarBtn.addActionListener(new Voltar(this,15));
+        this.painelRemoverDisciplina.add(VoltarBtn,BorderLayout.SOUTH);
+        
+        JButton RemoverBtn;
+        RemoverBtn = new JButton("Remover");
+        RemoverBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        RemoverBtn.addActionListener(new ConfirmaRemoveDisciplina(this, professor));
+        this.painelRemoverDisciplina.add(RemoverBtn,BorderLayout.EAST);
+        
+        JPanel painelFuncoes;
+        painelFuncoes = new JPanel();
+        painelFuncoes.setLayout(new GridLayout(0,2));
+        painelFuncoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+    }
+    
+    public void TelaProfessorEditarDisciplina(Professor professor)
+    {
+        VisibilidadeTelaProfessor();
+        this.setSize(1280,720);
+        this.setVisible(true);
+        
+        this.painelEditarDisciplina = new JPanel();
+        this.painelEditarDisciplina.setLayout(new BorderLayout());
+        this.painelEditarDisciplina.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+        
+        TelaProfessorEditarDisciplinaAux(professor);
+        
+        this.add(this.painelEditarDisciplina);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.repaint();
+    }
+    
+    private void TelaProfessorEditarDisciplinaAux(Professor professor)
+    {
+        disciplinas = new JList(professor.GetTurma().GetDisciplinas().toArray());
+        disciplinas.setVisible(true);
+        disciplinas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.painelEditarDisciplina.add(new JScrollPane(disciplinas), BorderLayout.WEST);
+        disciplinas.addListSelectionListener(new InfoListaDisciplina(this,professor));
+        
+        JLabel Titulo = new JLabel("EDITAR DISCIPLINA", SwingConstants.CENTER);
+        Titulo.setFont(new Font("Arial", Font.PLAIN, 120));
+        this.painelEditarDisciplina.add(Titulo, BorderLayout.NORTH);
+        
+        JButton VoltarBtn;
+        VoltarBtn = new JButton("Voltar");
+        VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        VoltarBtn.addActionListener(new Voltar(this,16));
+        this.painelEditarDisciplina.add(VoltarBtn,BorderLayout.SOUTH);
+        
+        JButton EditarBtn;
+        EditarBtn = new JButton("Editar");
+        EditarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        EditarBtn.addActionListener(new ConfirmaEditaDisciplina(this, professor));
+        this.painelEditarDisciplina.add(EditarBtn,BorderLayout.EAST);
+        
+        JPanel painelFuncoes;
+        painelFuncoes = new JPanel();
+        painelFuncoes.setLayout(new GridLayout(0,2));
+        painelFuncoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+        
+        JLabel Id = new JLabel("Id:", SwingConstants.CENTER);
+        Id.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Id);
+        CadastrarIdDisciplina = new JTextField(25);
+        CadastrarIdDisciplina.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarIdDisciplina);
+        
+        JLabel Nome = new JLabel("Nome:", SwingConstants.CENTER);
+        Nome.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(Nome);
+        CadastrarNomeDisciplina = new JTextField(50);
+        CadastrarNomeDisciplina.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelFuncoes.add(CadastrarNomeDisciplina);
+        
+        this.painelEditarDisciplina.add(painelFuncoes,BorderLayout.CENTER);
+    }
+    
+    public void TelaMinhaTurma(Professor professor)
+    {
+        painelProfessor.setVisible(false);
+        this.setSize(1280,720);
+        this.setVisible(true);
+        
+        this.painelMinhaTurma = new JPanel();
+        this.painelMinhaTurma.setLayout(new BorderLayout());
+        this.painelMinhaTurma.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+        
+        TelaMinhaTurmaAux(professor);
+        
+        this.add(this.painelMinhaTurma);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.repaint();
+    }
+    
+    private void TelaMinhaTurmaAux(Professor professor)
+    {
+        JLabel Titulo = new JLabel("TURMA " + professor.GetTurma().GetId(), SwingConstants.CENTER);
+        Titulo.setFont(new Font("Arial", Font.PLAIN, 120));
+        this.painelMinhaTurma.add(Titulo, BorderLayout.NORTH);
+        
+        JPanel painelFuncoes;
+        painelFuncoes = new JPanel();
+        painelFuncoes.setLayout(new GridLayout(0,2));
+        painelFuncoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+        
+        alunosTurma = new JList(professor.GetTurma().GetAlunos().toArray());
+        alunosTurma.setVisible(true);
+        alunosTurma.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.painelMinhaTurma.add(new JScrollPane(alunosTurma), BorderLayout.CENTER);
+        
+        JButton VoltarBtn;
+        VoltarBtn = new JButton("Voltar");
+        VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        VoltarBtn.addActionListener(new Voltar(this, 13));
+        //this.painelMinhaTurma.add(VoltarBtn,BorderLayout.SOUTH);
+        painelFuncoes.add(VoltarBtn);
+        
+        JButton RemoverAlunoBtn;
+        RemoverAlunoBtn = new JButton("Remover");
+        RemoverAlunoBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        RemoverAlunoBtn.addActionListener(new RemoverAlunoTurma(this, professor));
+        painelFuncoes.add(RemoverAlunoBtn);
+        
+        this.painelMinhaTurma.add(painelFuncoes, BorderLayout.SOUTH);
     }
     
     public void TelaAlteraSenha(Professor professor)
@@ -1200,6 +1435,98 @@ public class Tela extends JFrame
         this.painelAlteraSenha.add(VoltarBtn,BorderLayout.SOUTH);
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public void TelaAluno(Aluno aluno)
+    {
+        painelPrincipal.setVisible(false);
+        this.setSize(1280,720);
+        this.setVisible(true);
+        
+        this.painelAluno = new JPanel();
+        this.painelAluno.setLayout(new BorderLayout());
+        this.painelAluno.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+        
+        TelaAlunoAux(aluno);
+        
+        this.add(this.painelAluno);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.repaint();
+    }
+    
+    private void TelaAlunoAux(Aluno aluno)
+    {
+        JLabel preencheEspaco0 = new JLabel();
+        JLabel preencheEspaco1 = new JLabel();
+        JLabel preencheEspaco2 = new JLabel();
+        JLabel preencheEspaco3 = new JLabel();
+        
+        JButton SairBtn;
+        SairBtn = new JButton("Sair");
+        SairBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        SairBtn.addActionListener(new Sair(this,3));
+        this.painelAluno.add(SairBtn,BorderLayout.SOUTH);
+        
+        JLabel alunoTitulo = new JLabel(aluno.GetNome(), SwingConstants.CENTER);
+        alunoTitulo.setFont(new Font("Arial", Font.PLAIN, 120));
+        this.painelAluno.add(alunoTitulo, BorderLayout.NORTH);
+        
+        JPanel painelFuncoes;
+        painelFuncoes = new JPanel();
+        painelFuncoes.setLayout(new GridLayout(0,2));
+        painelFuncoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+        
+        painelFuncoes.add(preencheEspaco0);
+        painelFuncoes.add(preencheEspaco1);
+        
+        JButton AlterarSenhaBtn;
+        AlterarSenhaBtn = new JButton("Alterar Senha");
+        AlterarSenhaBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        AlterarSenhaBtn.addActionListener(new AlterarSenha(this, aluno));
+        painelFuncoes.add(AlterarSenhaBtn);
+        
+        JButton MinhasNotasBtn;
+        MinhasNotasBtn = new JButton("Minhas Notas");
+        MinhasNotasBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        //MinhasNotasBtn.addActionListener(new MinhasNotas(this));
+        painelFuncoes.add(MinhasNotasBtn);
+        
+        painelFuncoes.add(preencheEspaco2);
+        painelFuncoes.add(preencheEspaco3);
+        
+        this.painelAluno.add(painelFuncoes, BorderLayout.CENTER);
+    }
+    
     public void TelaAlteraSenha(Aluno aluno)
     {
         painelAluno.setVisible(false);
@@ -1261,6 +1588,32 @@ public class Tela extends JFrame
         VoltarBtn.addActionListener(new Voltar(this,12));
         this.painelAlteraSenha.add(VoltarBtn,BorderLayout.SOUTH);
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     public static void main(String[] args) 
     {
@@ -1383,17 +1736,32 @@ public class Tela extends JFrame
     
     public JList<Turma> GetTurmas() 
     {
-        return Turmas;
+        return this.Turmas;
     }
     
     public JList<Aluno> GetAlunos() 
     {
-        return Alunos;
+        return this.Alunos;
     }
     
     public JList<Professor> GetProfessores() 
     {
-        return Professores;
+        return this.Professores;
+    }
+    
+    public JList<Aluno> GetAlunosTurma()
+    {
+        return this.alunosTurma;
+    }
+    
+    public JList <Disciplina> GetDisciplinas()
+    {
+        return this.disciplinas;
+    }
+    
+    public void SetDisciplinas(JList<Disciplina> disciplinas)
+    {
+        this.disciplinas = disciplinas;
     }
     
     public JTextField GetUsuario()
@@ -1501,6 +1869,16 @@ public class Tela extends JFrame
         return this.EditaSenha;
     }
     
+    public JTextField GetCadastrarIdDisciplina()
+    {
+        return this.CadastrarIdDisciplina;
+    }
+    
+    public JTextField GetCadastrarNomeDisciplina()
+    {
+        return this.CadastrarNomeDisciplina;
+    }
+    
     //Altera visibilidade
     public void VisibilidadeTelaAdmin()
     {
@@ -1578,4 +1956,24 @@ public class Tela extends JFrame
         this.painelAlteraSenha.setVisible(false);
     }
     
+    public void VisibilidadeTelaMinhaTurma()
+    {
+        this.painelMinhaTurma.setVisible(false);
+    }
+    
+    public void VisibilidadeTelaCadastrarDisciplina()
+    {
+        this.painelCadastrarDisciplina.setVisible(false);
+    }
+    
+    public void VisibilidadeTelaRemoverDisciplina()
+    {
+        this.painelRemoverDisciplina.setVisible(false);
+    }
+    
+    public void VisibilidadeTelaEditarDisciplina()
+    {
+        this.painelEditarDisciplina.setVisible(false);
+    }
+      
 }
