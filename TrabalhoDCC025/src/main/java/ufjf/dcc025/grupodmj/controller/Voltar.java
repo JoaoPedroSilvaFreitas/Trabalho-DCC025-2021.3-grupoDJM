@@ -114,7 +114,21 @@ public class Voltar implements ActionListener
                                                                                                                                 {
                                                                                                                                     tela.VisibilidadeTelaEditarDisciplina();
                                                                                                                                     tela.TelaProfessor(Login.professor);
-                                                                                                                                }
+                                                                                                                                }else
+                                                                                                                                    {
+                                                                                                                                        if(TelaId == 17)
+                                                                                                                                        {
+                                                                                                                                            tela.VisibilidadeTelaMural();
+                                                                                                                                            tela.TelaProfessor(Login.professor);
+                                                                                                                                        }else
+                                                                                                                                            {
+                                                                                                                                                if(TelaId == 18)
+                                                                                                                                                {
+                                                                                                                                                    tela.VisibilidadeTelaMural();
+                                                                                                                                                    tela.TelaAluno(Login.aluno);
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                    }
                                                                                                                             }
                                                                                                                     }
                                                                                                             }

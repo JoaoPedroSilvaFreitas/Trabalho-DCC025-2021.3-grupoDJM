@@ -5,6 +5,7 @@ public class Disciplina
 {
     //Atributos
     String id, Nome;
+    String mural;
     
     //Construtor
     public Disciplina(String id, String Nome)
@@ -24,6 +25,11 @@ public class Disciplina
         this.Nome = Nome;
     }
     
+    public void SetMural(String mural)
+    {
+        this.mural = mural;
+    }
+    
     
     //Getters
     public String GetId()
@@ -34,6 +40,11 @@ public class Disciplina
     public String GetNome()
     {
         return this.Nome;
+    }
+    
+    public String GetMural()
+    {
+        return this.mural;
     }
     
     //toString

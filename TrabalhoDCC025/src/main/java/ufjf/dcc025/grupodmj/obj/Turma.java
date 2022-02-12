@@ -20,46 +20,14 @@ public class Turma
         this.professor = professor;
     }
     
-    //Adiciona alunos na turma
     public void AddAluno(Aluno aluno)
     {
         alunos.add(aluno);
     }
     
-    //Adiciona disciplinas na turma
     public void AddDisciplina(Disciplina disciplina)
     {
         disciplinas.add(disciplina);
-    }
-    
-    //retorna aluno da turma
-    public Aluno GetAluno(String Id)
-    {
-        for(Aluno aluno : alunos)
-        {
-            if(aluno.GetId().equals(Id))
-            {
-                return aluno;
-            }
-        }
-        return null;
-    }
-    
-    
-    public List<Aluno> GetAlunos()
-    {
-        return this.alunos;
-    }
-    
-    public List<Disciplina> GetDisciplinas()
-    {
-        return this.disciplinas;
-    }
-    
-    //Edita Professor da turma
-    public void SetProfessor(Professor professor)
-    {
-        this.professor = professor;
     }
     
     //Setters
@@ -76,6 +44,11 @@ public class Turma
     public void SetTurno(String Turno)
     {
         this.Turno = Turno;
+    }
+    
+    public void SetProfessor(Professor professor)
+    {
+        this.professor = professor;
     }
     
     //Getters
@@ -97,6 +70,28 @@ public class Turma
     public String GetTurno()
     {
         return this.Turno;
+    }
+    
+    public List<Aluno> GetAlunos()
+    {
+        return this.alunos;
+    }
+    
+    public List<Disciplina> GetDisciplinas()
+    {
+        return this.disciplinas;
+    }
+    
+    public Aluno GetAluno(String Id)
+    {
+        for(Aluno aluno : alunos)
+        {
+            if(aluno.GetId().equals(Id))
+            {
+                return aluno;
+            }
+        }
+        return null;
     }
     
     public String toString()

@@ -12,7 +12,7 @@ public class Tela extends JFrame
     private JPanel painelProfessor;
     private JPanel painelAluno;
     private JPanel painelLogin;
-    private JPanel painelAddAlunoTurma;
+    
     
     
     private JPanel painelCadastrarAluno;
@@ -44,14 +44,19 @@ public class Tela extends JFrame
     private JTextField CadastrarSerieTurma;
     private JTextField CadastrarTurnoTurma;
     private JTextField CadastrarProfessorTurma;
+    private JPanel painelAddAlunoTurma;
     
     private JPanel painelCadastrarDisciplina;
     private JPanel painelRemoverDisciplina;
     private JPanel painelEditarDisciplina;
+    private JPanel painelMinhaTurma;
+    private JPanel painelMural;
+    private JTextField ConteudoMural;
     private JTextField CadastrarIdDisciplina;
     private JTextField CadastrarNomeDisciplina;
-    
-    private JPanel painelMinhaTurma;
+    private JLabel NomeAluno;
+    private JLabel NomeDisciplina;
+    private JLabel MuralAluno;
     
     private JPanel painelAlteraSenha;
     private JTextField EditaSenha;
@@ -100,6 +105,33 @@ public class Tela extends JFrame
                 {
                     professor.SetTurma(turma);
                 }
+            }
+        }
+    }
+    
+    private void AtualizaDadosAluno()
+    {
+        DefaultListModel<Turma> modelTurma = (DefaultListModel<Turma>) GetTurmas().getModel();
+        DefaultListModel<Aluno> modelAluno = (DefaultListModel<Aluno>) GetAlunos().getModel();
+        Aluno aluno;
+        Turma turma;
+        
+        for(int i = 0; i < modelAluno.size(); i++)
+        {
+            aluno = modelAluno.getElementAt(i);
+            for(int j = 0; j < modelTurma.size(); j++)
+            {
+                turma = modelTurma.getElementAt(j);
+                
+                for(int z = 0; z < turma.GetAlunos().size(); z++)
+                {
+                    if(aluno.GetId().equals(turma.GetAlunos().get(z).GetId()))
+                    {
+                        aluno.SetTurma(turma);
+                        aluno.SetDisciplinas(turma.GetDisciplinas());
+                    }
+                }
+                
             }
         }
     }
@@ -1134,11 +1166,11 @@ public class Tela extends JFrame
         MinhaTurmaBtn.addActionListener(new MinhaTurma(this, professor));
         painelFuncoes.add(MinhaTurmaBtn);
         
-        JButton NotasBtn;
-        NotasBtn = new JButton("Notas");
-        NotasBtn.setFont(new Font("Arial", Font.PLAIN, 26));
-        //NotasBtn.addActionListener(new Notas(this));
-        painelFuncoes.add(NotasBtn);
+        JButton MuralBtn;
+        MuralBtn = new JButton("Mural");
+        MuralBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        MuralBtn.addActionListener(new Mural(this, professor, 0));
+        painelFuncoes.add(MuralBtn);
         
         painelFuncoes.add(preencheEspaco6);
         painelFuncoes.add(preencheEspaco7);
@@ -1150,7 +1182,7 @@ public class Tela extends JFrame
             RemoverDisciplinaBtn.setEnabled(false);
             EditarDisciplinaBtn.setEnabled(false);
             MinhaTurmaBtn.setEnabled(false);
-            NotasBtn.setEnabled(false);
+            MuralBtn.setEnabled(false);
         }
         
         this.painelProfessor.add(painelFuncoes, BorderLayout.CENTER);
@@ -1435,7 +1467,59 @@ public class Tela extends JFrame
         this.painelAlteraSenha.add(VoltarBtn,BorderLayout.SOUTH);
     }
     
+    public void TelaMural(Professor professor)
+    {
+        painelProfessor.setVisible(false);
+        this.setSize(1280,720);
+        this.setVisible(true);
+        
+        this.painelMural = new JPanel();
+        this.painelMural.setLayout(new BorderLayout());
+        this.painelMural.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+        
+        TelaMuralAux(professor);
+        
+        this.add(this.painelMural);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.repaint();
+    }
     
+    private void TelaMuralAux(Professor professor)
+    {
+        disciplinas = new JList(professor.GetTurma().GetDisciplinas().toArray());
+        disciplinas.setVisible(true);
+        disciplinas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.painelMural.add(new JScrollPane(disciplinas), BorderLayout.WEST);
+        disciplinas.addListSelectionListener(new InfoListaDisciplinas(this, professor, 0));
+        
+        JLabel Titulo = new JLabel("MURAL", SwingConstants.CENTER);
+        Titulo.setFont(new Font("Arial", Font.PLAIN, 120));
+        this.painelMural.add(Titulo, BorderLayout.NORTH);
+        
+        ConteudoMural = new JTextField(1000);
+        ConteudoMural.setFont(new Font("Arial", Font.PLAIN, 22));
+        painelMural.add(ConteudoMural, BorderLayout.CENTER);
+        
+
+        JPanel painelbotoes;
+        painelbotoes = new JPanel();
+        painelbotoes.setLayout(new GridLayout(0,2));
+        painelbotoes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+        
+        JButton VoltarBtn;
+        VoltarBtn = new JButton("Voltar");
+        VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        VoltarBtn.addActionListener(new Voltar(this, 17));
+        painelbotoes.add(VoltarBtn);
+        
+        JButton PublicarBtn;
+        PublicarBtn = new JButton("Publicar");
+        PublicarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        PublicarBtn.addActionListener(new Publicar(this, professor));
+        painelbotoes.add(PublicarBtn);
+        
+        this.painelMural.add(painelbotoes, BorderLayout.SOUTH);
+    }
     
     
     
@@ -1477,6 +1561,7 @@ public class Tela extends JFrame
         this.painelAluno.setLayout(new BorderLayout());
         this.painelAluno.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
         
+        AtualizaDadosAluno();
         TelaAlunoAux(aluno);
         
         this.add(this.painelAluno);
@@ -1515,11 +1600,11 @@ public class Tela extends JFrame
         AlterarSenhaBtn.addActionListener(new AlterarSenha(this, aluno));
         painelFuncoes.add(AlterarSenhaBtn);
         
-        JButton MinhasNotasBtn;
-        MinhasNotasBtn = new JButton("Minhas Notas");
-        MinhasNotasBtn.setFont(new Font("Arial", Font.PLAIN, 26));
-        //MinhasNotasBtn.addActionListener(new MinhasNotas(this));
-        painelFuncoes.add(MinhasNotasBtn);
+        JButton MuralBtn;
+        MuralBtn = new JButton("Mural");
+        MuralBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        MuralBtn.addActionListener(new Mural(this, aluno, 1));
+        painelFuncoes.add(MuralBtn);
         
         painelFuncoes.add(preencheEspaco2);
         painelFuncoes.add(preencheEspaco3);
@@ -1589,18 +1674,46 @@ public class Tela extends JFrame
         this.painelAlteraSenha.add(VoltarBtn,BorderLayout.SOUTH);
     }
     
+    public void TelaMural(Aluno aluno)
+    {
+        painelAluno.setVisible(false);
+        this.setSize(1280,720);
+        this.setVisible(true);
+        
+        this.painelMural = new JPanel();
+        this.painelMural.setLayout(new BorderLayout());
+        this.painelMural.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+        
+        TelaMuralAux(aluno);
+        
+        this.add(this.painelMural);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.repaint();
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    private void TelaMuralAux(Aluno aluno)
+    {
+
+        disciplinas = new JList(aluno.GetTurma().GetDisciplinas().toArray());
+        disciplinas.setVisible(true);
+        disciplinas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.painelMural.add(new JScrollPane(disciplinas), BorderLayout.EAST);
+        disciplinas.addListSelectionListener(new InfoListaDisciplinas(this, aluno, 1));
+        
+        JLabel Titulo = new JLabel("MURAL", SwingConstants.CENTER);
+        Titulo.setFont(new Font("Arial", Font.PLAIN, 120));
+        this.painelMural.add(Titulo, BorderLayout.NORTH);
+        
+        MuralAluno = new JLabel();
+        MuralAluno.setFont(new Font("Arial", Font.PLAIN, 40));
+        this.painelMural.add(MuralAluno, BorderLayout.CENTER);
+
+        JButton VoltarBtn;
+        VoltarBtn = new JButton("Voltar");
+        VoltarBtn.setFont(new Font("Arial", Font.PLAIN, 26));
+        VoltarBtn.addActionListener(new Voltar(this, 18));
+        this.painelMural.add(VoltarBtn, BorderLayout.SOUTH);
+    }
     
     
     
@@ -1728,6 +1841,11 @@ public class Tela extends JFrame
         this.CadastrarProfessorTurma = CadastrarProfessorTurma;
     }
     
+    public void SetDisciplinas(JList<Disciplina> disciplinas)
+    {
+        this.disciplinas = disciplinas;
+    }
+    
     //Getters
     public int GetLastId()
     {
@@ -1757,11 +1875,6 @@ public class Tela extends JFrame
     public JList <Disciplina> GetDisciplinas()
     {
         return this.disciplinas;
-    }
-    
-    public void SetDisciplinas(JList<Disciplina> disciplinas)
-    {
-        this.disciplinas = disciplinas;
     }
     
     public JTextField GetUsuario()
@@ -1879,6 +1992,26 @@ public class Tela extends JFrame
         return this.CadastrarNomeDisciplina;
     }
     
+    public JTextField GetConteudoMural()
+    {
+        return this.ConteudoMural;
+    }
+    
+    public JLabel GetNomeAluno()
+    {
+        return this.NomeAluno;
+    }
+    
+    public JLabel GetMuralAluno()
+    {
+        return this.MuralAluno;
+    }
+    
+    public JLabel GetNomeDisciplina()
+    {
+        return this.NomeDisciplina;
+    }
+    
     //Altera visibilidade
     public void VisibilidadeTelaAdmin()
     {
@@ -1975,5 +2108,11 @@ public class Tela extends JFrame
     {
         this.painelEditarDisciplina.setVisible(false);
     }
+    
+    public void VisibilidadeTelaMural()
+    {
+        this.painelMural.setVisible(false);
+    }
+    
       
 }

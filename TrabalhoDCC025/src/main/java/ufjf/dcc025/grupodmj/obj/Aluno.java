@@ -1,8 +1,11 @@
 package ufjf.dcc025.grupodmj.obj;
 
+import java.util.List;
+
 
 public class Aluno extends Membro
 {
+    List<Disciplina> disciplinas;
     //Construtor
     public Aluno(String Id, String Senha, String Nome, String DataDeNasc, String Filiacao, String Telefone, String Endereco)
     {
@@ -13,6 +16,16 @@ public class Aluno extends Membro
         this.Filiacao = Filiacao;
         this.Telefone = Telefone;
         this.Endereco = Endereco;
+    }
+    
+    public List<Disciplina> GetDisciplinas()
+    {
+        return this.disciplinas;
+    }
+    
+    public void SetDisciplinas(List<Disciplina> disciplinas)
+    {
+        disciplinas = Turma.GetDisciplinas();
     }
     
     //toString
